@@ -1,133 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apps That Matter</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>AppsThatMatter</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f8f8; color: #1f1f1f; }
+    .card { transition: transform 0.2s ease; }
+    .card:hover { transform: scale(1.03); }
+  </style>
 </head>
-
-<body class="bg-gray-100 text-gray-800">
+<body class="font-sans">
   <!-- Header -->
-  <header class="flex items-center justify-between p-4 bg-white shadow">
-    <div class="flex items-center space-x-2">
-      <img src="/logo.png" alt="Logo" class="w-8 h-8" id="brand-logo" />
-      <h1 class="text-xl font-bold" id="brand-name">Apps That Matter</h1>
+  <header class="flex items-center justify-between p-4 bg-gray-900 text-white">
+    <div class="flex items-center gap-2">
+      <img src="./logo.png" alt="AppsThatMatter Logo" class="w-10 h-10 rounded">
+      <h1 class="text-xl font-bold">AppsThatMatter</h1>
     </div>
   </header>
 
-  <!-- Admin Customization Panel (only visible to admin) -->
-  <div class="p-4 bg-yellow-50 rounded-md max-w-xl mx-auto mt-6">
-    <h2 class="text-lg font-semibold mb-2">Admin Customization</h2>
-    <label class="block mb-1 font-medium">Brand Name</label>
-    <input type="text" id="brandName" class="w-full p-2 border rounded mb-4" placeholder="Apps That Matter" />
-
-    <label class="block mb-1 font-medium">Logo Image URL</label>
-    <input type="text" id="logoUrl" class="w-full p-2 border rounded mb-4" placeholder="/logo.png" />
-
-    <label class="block mb-1 font-medium">Primary Theme Color</label>
-    <input type="color" id="themeColor" class="w-full h-10 p-1 mb-4 border rounded" />
-
-    <button onclick="saveSettings()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-      Save Settings
-    </button>
-    <p id="status" class="mt-2 text-green-600 hidden">✅ Settings saved locally.</p>
-  </div>
-
   <!-- Search Bar -->
   <div class="p-4">
-    <input type="text" placeholder="Search apps..." id="search-input"
-      class="w-full p-2 border rounded-md shadow-sm" oninput="filterApps()" />
+    <input id="searchInput" type="text" placeholder="Search apps..." class="w-full p-2 border rounded shadow" onkeyup="filterApps()">
   </div>
 
-  <!-- Categories and Apps Grid -->
+  <!-- App Categories -->
   <main class="p-4 space-y-8">
-    <div id="app-categories"></div>
+    <!-- Example Category -->
+    <section>
+      <h2 class="text-lg font-semibold text-gray-700 mb-4">Productivity Tools</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <div class="card bg-white rounded-lg shadow p-4" data-name="emi calculator">
+          <img src="/icons/emi.png" class="w-12 h-12 mb-2" alt="EMI Icon">
+          <h3 class="font-bold text-gray-800">EMI Calculator</h3>
+          <p class="text-sm text-gray-600">Calculate your monthly loan EMIs easily.</p>
+          <a href="/emi-calculator" target="_blank" class="text-blue-500 mt-2 inline-block">Open App</a>
+        </div>
+        <div class="card bg-white rounded-lg shadow p-4" data-name="markdown reader">
+          <img src="/icons/markdown.png" class="w-12 h-12 mb-2" alt="Markdown Icon">
+          <h3 class="font-bold text-gray-800">Markdown Reader</h3>
+          <p class="text-sm text-gray-600">Paste and read markdown in a clean view.</p>
+          <a href="/markdown-reader" target="_blank" class="text-blue-500 mt-2 inline-block">Open App</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center text-sm text-gray-500 p-4">
-    &copy; 2025 Apps That Matter
+  <footer class="text-center text-gray-500 text-sm py-6 bg-gray-100">
+    &copy; 2025 AppsThatMatter. All rights reserved.
   </footer>
 
   <script>
-    const apps = [
-      { name: 'EMI Calculator', description: 'Calculate your loan EMIs easily.', icon: '📊', url: '/emi-calculator', category: 'Finance' },
-      { name: 'Markdown Reader', description: 'Preview markdown content beautifully.', icon: '📄', url: '/markdown-reader', category: 'Productivity' },
-      // Add more apps here...
-    ];
-
-    const categories = [...new Set(apps.map(app => app.category))];
-
-    function createAppCard(app) {
-      return `
-        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition-all cursor-pointer" onclick="window.open('${app.url}', '_blank')">
-          <div class="text-3xl">${app.icon}</div>
-          <h2 class="text-lg font-semibold mt-2">${app.name}</h2>
-          <p class="text-sm text-gray-600">${app.description}</p>
-        </div>
-      `;
-    }
-
-    function renderCategories() {
-      const container = document.getElementById('app-categories');
-      container.innerHTML = '';
-      categories.forEach(category => {
-        const categoryApps = apps.filter(app => app.category === category);
-        const cards = categoryApps.map(createAppCard).join('');
-        container.innerHTML += `
-          <div>
-            <h3 class="text-xl font-bold mb-2">${category}</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              ${cards}
-            </div>
-          </div>
-        `;
-      });
-    }
-
     function filterApps() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const filtered = apps.filter(app => app.name.toLowerCase().includes(query) || app.description.toLowerCase().includes(query));
-      const filteredCategories = [...new Set(filtered.map(app => app.category))];
-      const container = document.getElementById('app-categories');
-      container.innerHTML = '';
-      filteredCategories.forEach(category => {
-        const categoryApps = filtered.filter(app => app.category === category);
-        const cards = categoryApps.map(createAppCard).join('');
-        container.innerHTML += `
-          <div>
-            <h3 class="text-xl font-bold mb-2">${category}</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              ${cards}
-            </div>
-          </div>
-        `;
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = card.dataset.name.includes(query) ? 'block' : 'none';
       });
-    }
-
-    function saveSettings() {
-      localStorage.setItem('brandName', document.getElementById('brandName').value);
-      localStorage.setItem('logoUrl', document.getElementById('logoUrl').value);
-      localStorage.setItem('themeColor', document.getElementById('themeColor').value);
-      document.getElementById('status').classList.remove('hidden');
-      applySettings();
-    }
-
-    function applySettings() {
-      const name = localStorage.getItem('brandName');
-      const logo = localStorage.getItem('logoUrl');
-      const color = localStorage.getItem('themeColor');
-
-      if (name) document.getElementById('brand-name').textContent = name;
-      if (logo) document.getElementById('brand-logo').src = logo;
-      if (color) document.body.style.backgroundColor = color;
-    }
-
-    window.onload = function () {
-      applySettings();
-      renderCategories();
     }
   </script>
 </body>
