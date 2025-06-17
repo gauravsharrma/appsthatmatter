@@ -1,6 +1,0 @@
-{
-  "description": "An elegant and professional landing page showcasing a suite of applications. Each app is presented in a card with an image, name, description, and category.",
-  "prompt": "a landing page consisting of multiple apps. extremely good looking classy elegant and impressive and professionaa landing page consisting of links to other multiple apps. show card for each app with image, short name, brief description and category like finance, AI etc. . it should be  extremely good looking classy elegant and impressive and professional. must be using html javascript css tailwind only. use static only",
-  "requestFramePermissions": [],
-  "name": "App"
-}
