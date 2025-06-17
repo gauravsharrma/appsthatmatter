@@ -1,1 +1,96 @@
-Hi kdkd
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps That Matter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 bg-white shadow">
+    <div class="flex items-center space-x-2">
+      <img src="/logo.png" alt="Logo" class="w-8 h-8" id="brand-logo" />
+      <h1 class="text-xl font-bold" id="brand-name">Apps That Matter</h1>
+    </div>
+    <a href="/settings.html" class="text-blue-500 hover:underline">Settings</a>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="p-4">
+    <input type="text" placeholder="Search apps..." id="search-input"
+      class="w-full p-2 border rounded-md shadow-sm" oninput="filterApps()" />
+  </div>
+
+  <!-- Categories and Apps Grid -->
+  <main class="p-4 space-y-8">
+    <div id="app-categories"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 p-4">
+    &copy; 2025 Apps That Matter
+  </footer>
+
+  <script>
+    const apps = [
+      { name: 'EMI Calculator', description: 'Calculate your loan EMIs easily.', icon: '📊', url: '/emi-calculator', category: 'Finance' },
+      { name: 'Markdown Reader', description: 'Preview markdown content beautifully.', icon: '📄', url: '/markdown-reader', category: 'Productivity' },
+      // Add more apps here...
+    ];
+
+    const categories = [...new Set(apps.map(app => app.category))];
+
+    function createAppCard(app) {
+      return `
+        <div class="bg-white p-4 rounded-xl shadow hover:shadow-md transition-all cursor-pointer" onclick="window.open('${app.url}', '_blank')">
+          <div class="text-3xl">${app.icon}</div>
+          <h2 class="text-lg font-semibold mt-2">${app.name}</h2>
+          <p class="text-sm text-gray-600">${app.description}</p>
+        </div>
+      `;
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('app-categories');
+      container.innerHTML = '';
+      categories.forEach(category => {
+        const categoryApps = apps.filter(app => app.category === category);
+        const cards = categoryApps.map(createAppCard).join('');
+        container.innerHTML += `
+          <div>
+            <h3 class="text-xl font-bold mb-2">${category}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              ${cards}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filterApps() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const filtered = apps.filter(app => app.name.toLowerCase().includes(query) || app.description.toLowerCase().includes(query));
+      const filteredCategories = [...new Set(filtered.map(app => app.category))];
+      const container = document.getElementById('app-categories');
+      container.innerHTML = '';
+      filteredCategories.forEach(category => {
+        const categoryApps = filtered.filter(app => app.category === category);
+        const cards = categoryApps.map(createAppCard).join('');
+        container.innerHTML += `
+          <div>
+            <h3 class="text-xl font-bold mb-2">${category}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              ${cards}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    renderCategories();
+  </script>
+</body>
+</html>
