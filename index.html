@@ -2,76 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AppsThatMatter</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f4f4f5;
-      color: #1f1f1f;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-    .card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #333;
-      border-left: 4px solid #999;
-      padding-left: 12px;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="font-sans">
-  <!-- Header -->
-  <header class="flex items-center justify-between p-6 bg-white shadow-sm border-b border-gray-200">
-    <div class="text-2xl font-semibold text-gray-800">
-      AppsThatMatter
-    </div>
-  </header>
+<body class="bg-gray-100 text-gray-800 antialiased">
+  <!-- Container -->
+  <div class="container mx-auto px-4 py-10">
+    <!-- Header -->
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl font-bold">AppsThatMatter</h1>
+      <p class="text-gray-600 mt-2">A showcase of our handy web-based tools</p>
+    </header>
 
-  <!-- Search Bar -->
-  <div class="max-w-4xl mx-auto p-6">
-    <input id="searchInput" type="text" placeholder="Search apps..." class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" onkeyup="filterApps()">
+    <!-- App Grid -->
+    <main id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cards injected here -->
+    </main>
   </div>
 
-  <!-- App Categories -->
-  <main class="max-w-6xl mx-auto p-6 space-y-12">
-    <!-- Example Category -->
-    <section>
-      <h2 class="section-title mb-6">Productivity Tools</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="card bg-white rounded-xl border border-gray-200 p-6" data-name="emi calculator">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">EMI Calculator</h3>
-          <p class="text-sm text-gray-600 mb-4">Calculate your monthly loan EMIs easily.</p>
-          <a href="/emi-calculator" target="_blank" class="text-sm text-gray-700 underline">Open App</a>
-        </div>
-        <div class="card bg-white rounded-xl border border-gray-200 p-6" data-name="markdown reader">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Markdown Reader</h3>
-          <p class="text-sm text-gray-600 mb-4">Paste and read markdown in a clean view.</p>
-          <a href="/markdown-reader" target="_blank" class="text-sm text-gray-700 underline">Open App</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center text-gray-400 text-sm py-8 border-t border-gray-200 bg-white">
-    &copy; 2025 AppsThatMatter. All rights reserved.
-  </footer>
-
   <script>
-    function filterApps() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      document.querySelectorAll('.card').forEach(card => {
-        card.style.display = card.dataset.name.includes(query) ? 'block' : 'none';
+    // Define your apps here
+    const apps = [
+      {
+        name: 'EMI Calculator',
+        description: 'Calculate your monthly EMI effortlessly.',
+        // Inline Heroicon: calculator
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-indigo-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   d="M8 2h8a2 2 0 012 2v16a2 2 0 01-2 2H8a2 2 0 01-2-2V4a2 2 0 012-2z" />
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   d="M8 6h8M8 10h8M8 14h8M8 18h8" />
+               </svg>`,
+        category: 'Finance',
+        url: '/emi-calculator'
+      },
+      {
+        name: 'Markdown Reader',
+        description: 'Preview and read Markdown files with ease.',
+        // Inline Heroicon: document-text
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   d="M7 8h10M7 12h4m-4 4h10" />
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                   d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+               </svg>`,
+        category: 'Utility',
+        url: '/markdown-reader'
+      }
+    ];
+
+    // Renders each app as a card
+    function renderApps() {
+      const grid = document.getElementById('app-grid');
+      apps.forEach(app => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow-sm p-6 flex flex-col hover:shadow-lg transition-shadow';
+        card.innerHTML = `
+          <div class="flex-shrink-0">${app.icon}</div>
+          <h2 class="text-xl font-semibold mb-2">${app.name}</h2>
+          <p class="text-gray-600 flex-grow">${app.description}</p>
+          <span class="inline-block bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full mt-4">
+            ${app.category}
+          </span>
+          <a href="${app.url}" class="mt-6 inline-block text-indigo-600 hover:underline font-medium">
+            Open App →
+          </a>
+        `;
+        grid.appendChild(card);
       });
     }
+
+    document.addEventListener('DOMContentLoaded', renderApps);
   </script>
 </body>
 </html>
