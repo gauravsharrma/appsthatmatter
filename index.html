@@ -6,48 +6,64 @@
   <title>AppsThatMatter</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body { background-color: #f8f8f8; color: #1f1f1f; }
-    .card { transition: transform 0.2s ease; }
-    .card:hover { transform: scale(1.03); }
+    body {
+      background-color: #f4f4f5;
+      color: #1f1f1f;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+    .card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      border-left: 4px solid #999;
+      padding-left: 12px;
+    }
   </style>
 </head>
 <body class="font-sans">
   <!-- Header -->
-  <header class="flex items-center justify-between p-4 bg-white shadow">
-    <div class="flex items-center gap-2">
-      <img src="./logo.png" alt="AppsThatMatter Logo" class="w-10 h-10 rounded">
+  <header class="flex items-center justify-between p-6 bg-white shadow-sm border-b border-gray-200">
+    <div class="flex items-center gap-3">
+      <img src="./logo.png" alt="AppsThatMatter Logo" class="w-12 h-12">
     </div>
   </header>
 
   <!-- Search Bar -->
-  <div class="p-4">
-    <input id="searchInput" type="text" placeholder="Search apps..." class="w-full p-2 border rounded shadow" onkeyup="filterApps()">
+  <div class="max-w-4xl mx-auto p-6">
+    <input id="searchInput" type="text" placeholder="Search apps..." class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" onkeyup="filterApps()">
   </div>
 
   <!-- App Categories -->
-  <main class="p-4 space-y-8">
+  <main class="max-w-6xl mx-auto p-6 space-y-12">
     <!-- Example Category -->
     <section>
-      <h2 class="text-lg font-semibold text-gray-700 mb-4">Productivity Tools</h2>
-      <div class="grid gap-4 md:grid-cols-3">
-        <div class="card bg-white rounded-lg shadow p-4" data-name="emi calculator">
-          <img src="/icons/emi.png" class="w-12 h-12 mb-2" alt="EMI Icon">
-          <h3 class="font-bold text-gray-800">EMI Calculator</h3>
-          <p class="text-sm text-gray-600">Calculate your monthly loan EMIs easily.</p>
-          <a href="/emi-calculator" target="_blank" class="text-blue-500 mt-2 inline-block">Open App</a>
+      <h2 class="section-title mb-6">Productivity Tools</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="card bg-white rounded-xl border border-gray-200 p-6" data-name="emi calculator">
+          <img src="/icons/emi.png" class="w-10 h-10 mb-4" alt="EMI Icon">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">EMI Calculator</h3>
+          <p class="text-sm text-gray-600 mb-4">Calculate your monthly loan EMIs easily.</p>
+          <a href="/emi-calculator" target="_blank" class="text-sm text-gray-700 underline">Open App</a>
         </div>
-        <div class="card bg-white rounded-lg shadow p-4" data-name="markdown reader">
-          <img src="/icons/markdown.png" class="w-12 h-12 mb-2" alt="Markdown Icon">
-          <h3 class="font-bold text-gray-800">Markdown Reader</h3>
-          <p class="text-sm text-gray-600">Paste and read markdown in a clean view.</p>
-          <a href="/markdown-reader" target="_blank" class="text-blue-500 mt-2 inline-block">Open App</a>
+        <div class="card bg-white rounded-xl border border-gray-200 p-6" data-name="markdown reader">
+          <img src="/icons/markdown.png" class="w-10 h-10 mb-4" alt="Markdown Icon">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Markdown Reader</h3>
+          <p class="text-sm text-gray-600 mb-4">Paste and read markdown in a clean view.</p>
+          <a href="/markdown-reader" target="_blank" class="text-sm text-gray-700 underline">Open App</a>
         </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center text-gray-500 text-sm py-6 bg-gray-100">
+  <footer class="text-center text-gray-400 text-sm py-8 border-t border-gray-200 bg-white">
     &copy; 2025 AppsThatMatter. All rights reserved.
   </footer>
 
