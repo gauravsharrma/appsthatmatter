@@ -1,28 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta & SEO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AppsThatMatter</title>
+  <meta name="description" content="Quick, Meaningful AppsThatMatter—Fueling Productivity & Uplifting Lives. A collection of purposeful web apps for global users.">
+  <meta name="keywords" content="web apps, productivity tools, EMI calculator, Markdown reader, global productivity">
+  <link rel="canonical" href="https://appsthatmatter.onrender.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AppsThatMatter">
+  <meta property="og:description" content="Quick, Meaningful AppsThatMatter—Fueling Productivity & Uplifting Lives.">
+  <meta property="og:image" content="https://appsthatmatter.onrender.com/og-image.png">
+  <meta property="og:url" content="https://appsthatmatter.onrender.com/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@YourTwitterHandle">
+  <meta name="twitter:title" content="AppsThatMatter">
+  <meta name="twitter:description" content="Quick, Meaningful AppsThatMatter—Fueling Productivity & Uplifting Lives.">
+  <meta name="twitter:image" content="https://appsthatmatter.onrender.com/twitter-image.png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "AppsThatMatter",
+        "url": "https://appsthatmatter.onrender.com/",
+        "logo": "https://appsthatmatter.onrender.com/logo.png",
+        "sameAs": [
+          "https://twitter.com/YourTwitterHandle",
+          "https://www.linkedin.com/company/appsthatmatter"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://appsthatmatter.onrender.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://appsthatmatter.onrender.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://appsthatmatter.onrender.com/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YYYYYYYYYY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YYYYYYYYYY');
+  </script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 antialiased">
-  <div class="container mx-auto px-4 py-10">
-    <!-- Header -->
-    <header class="mb-8 text-center">
-  <h1 class="text-4xl font-bold">AppsThatMatter</h1>
-  <p class="text-gray-600 mt-2">
-    Quick, Meaningful AppsThatMatter—Fueling Productivity & Uplifting Lives.
-  </p>
-</header>
+  <!-- GTM noscript -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
+  <div class="container mx-auto px-4 py-10">
+
+    <!-- Header & Referral -->
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl font-bold">AppsThatMatter</h1>
+      <p class="text-gray-600 mt-2">
+        Quick, Meaningful AppsThatMatter—Fueling Productivity &amp; Uplifting Lives.
+      </p>
+      <button id="subscribe-btn"
+              class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded"
+              data-ab-test="subscribe_cta">
+        Subscribe for Updates
+      </button>
+      <p class="mt-4 text-sm">
+        Invite a friend: <a href="#" id="referral-link" class="text-indigo-600 hover:underline">Share your code</a>
+      </p>
+    </header>
+
+    <!-- Email Capture Modal -->
+    <div id="subscribe-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md">
+        <h2 class="text-2xl font-semibold mb-4">Stay in the Loop</h2>
+        <form id="subscribe-form" class="flex flex-col">
+          <input type="email" name="email" placeholder="Your email address" required
+                 class="mb-4 px-4 py-2 border rounded">
+          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">
+            Subscribe
+          </button>
+        </form>
+        <button id="close-modal" class="mt-4 text-gray-500 hover:underline">Close</button>
+      </div>
+    </div>
 
     <!-- Search & Category Filter -->
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <input
         id="search-input"
         type="text"
-        placeholder="🔍 Search apps..."
+        placeholder="🔍 Search web apps..."
         class="w-full sm:w-1/2 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-indigo-300"
       />
       <select
@@ -34,9 +141,20 @@
     </div>
 
     <!-- App Grid -->
-    <main id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Cards injected here -->
-    </main>
+    <main id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></main>
+
+    <!-- Recommended for You -->
+    <section id="recommended" class="mt-10 hidden">
+      <h2 class="text-2xl font-semibold mb-4">Recommended for You</h2>
+      <div id="recommended-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- Community Feedback -->
+    <section id="comments" class="mt-10">
+      <h3 class="text-xl font-semibold mb-4">Community Feedback</h3>
+      <p class="text-gray-500">Comments section coming soon. Share your thoughts!</p>
+    </section>
+
   </div>
 
   <script>
@@ -67,53 +185,93 @@
       }
     ];
 
-    // Populate category dropdown with unique categories
+    // Build referral code
+    let refCode = localStorage.getItem('refCode');
+    if (!refCode) {
+      refCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+      localStorage.setItem('refCode', refCode);
+    }
+
     function populateCategoryFilter() {
       const select = document.getElementById('category-filter');
-      const categories = ['All', ...new Set(apps.map(a => a.category))];
-      categories.forEach(cat => {
+      const cats = ['All', ...new Set(apps.map(a => a.category))];
+      cats.forEach(c => {
         const opt = document.createElement('option');
-        opt.value = cat;
-        opt.textContent = cat;
+        opt.value = c;
+        opt.textContent = c;
         select.appendChild(opt);
       });
     }
 
-    // Render apps based on search + category filter
     function renderApps() {
       const grid = document.getElementById('app-grid');
       const term = document.getElementById('search-input').value.toLowerCase();
       const category = document.getElementById('category-filter').value;
       grid.innerHTML = '';
 
-      apps
-        .filter(app => {
-          const matchesSearch =
-            app.name.toLowerCase().includes(term) ||
-            app.description.toLowerCase().includes(term);
-          const matchesCategory = category === 'All' || app.category === category;
-          return matchesSearch && matchesCategory;
-        })
-        .forEach(app => {
-          const card = document.createElement('div');
-          card.className = 'bg-white rounded-lg shadow-sm p-6 flex flex-col hover:shadow-lg transition-shadow';
-          card.innerHTML = `
-            <div class="flex-shrink-0">${app.icon}</div>
-            <h2 class="text-xl font-semibold mb-2">${app.name}</h2>
-            <p class="text-gray-600 flex-grow">${app.description}</p>
-            <span class="inline-block bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full mt-4">
-              ${app.category}
-            </span>
-            <a href="${app.url}" class="mt-6 inline-block text-indigo-600 hover:underline font-medium">
-              Open App →
-            </a>
-          `;
-          grid.appendChild(card);
-        });
+      dataLayer.push({ event: 'filter', category, search: term });
 
-      if (!grid.children.length) {
+      const filtered = apps.filter(app => {
+        const okSearch = app.name.toLowerCase().includes(term)
+                       || app.description.toLowerCase().includes(term);
+        const okCat = category === 'All' || app.category === category;
+        return okSearch && okCat;
+      });
+
+      if (!filtered.length) {
         grid.innerHTML = `<p class="col-span-full text-center text-gray-500">No apps found.</p>`;
+        return;
       }
+
+      filtered.forEach(app => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow-sm p-6 flex flex-col hover:shadow-lg transition-shadow';
+        card.innerHTML = `
+          <div class="flex-shrink-0">${app.icon}</div>
+          <h2 class="text-xl font-semibold mb-2">${app.name}</h2>
+          <p class="text-gray-600 flex-grow">${app.description}</p>
+          <span class="inline-block bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full mt-4">
+            ${app.category}
+          </span>
+          <a href="${app.url}"
+             class="mt-4 inline-block text-indigo-600 hover:underline font-medium"
+             onclick="dataLayer.push({ event: 'app_click', app: '${app.name}' });">
+            Open App →
+          </a>
+          <div class="mt-4 flex space-x-3">
+            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(app.name + ' at ' + window.location.origin + app.url)}"
+               target="_blank" aria-label="Share on Twitter">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin + app.url)}"
+               target="_blank" aria-label="Share on LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(app.name + ' ' + window.location.origin + app.url)}"
+               target="_blank" aria-label="Share on WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="..."/></svg>
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function showRecommended() {
+      const recSec = document.getElementById('recommended');
+      const recGrid = document.getElementById('recommended-grid');
+      recGrid.innerHTML = '';
+      // Simple logic: recommend apps NOT clicked this session
+      const clicked = sessionStorage.getItem('clickedApps')?.split(',') || [];
+      const recs = apps.filter(a => !clicked.includes(a.name));
+      if (!recs.length) return;
+      recSec.classList.remove('hidden');
+      recs.forEach(app => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow-sm p-4';
+        card.innerHTML = `<h3 class="font-semibold">${app.name}</h3>`;
+        recGrid.appendChild(card);
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -121,6 +279,36 @@
       renderApps();
       document.getElementById('search-input').addEventListener('input', renderApps);
       document.getElementById('category-filter').addEventListener('change', renderApps);
+
+      // Subscribe modal logic
+      const modal = document.getElementById('subscribe-modal');
+      document.getElementById('subscribe-btn').onclick = () => modal.classList.remove('hidden');
+      document.getElementById('close-modal').onclick = () => modal.classList.add('hidden');
+      document.getElementById('subscribe-form').onsubmit = e => {
+        e.preventDefault();
+        dataLayer.push({ event: 'subscribe', email: e.target.email.value });
+        modal.classList.add('hidden');
+        alert('Thanks for subscribing!');
+      };
+
+      // Referral link
+      document.getElementById('referral-link').href =
+        `https://appsthatmatter.onrender.com/?ref=${refCode}`;
+      dataLayer.push({ event: 'page_view', refCode });
+
+      // Track clicks for recommendation
+      document.body.addEventListener('click', e => {
+        if (e.target.closest('a[onclick*="app_click"]')) {
+          const name = e.target.closest('a').onclick
+            .toString().match(/'app_click', app: '(.+)'/)[1];
+          const clicked = sessionStorage.getItem('clickedApps')?.split(',') || [];
+          if (!clicked.includes(name)) {
+            clicked.push(name);
+            sessionStorage.setItem('clickedApps', clicked.join(','));
+          }
+          showRecommended();
+        }
+      });
     });
   </script>
 </body>
