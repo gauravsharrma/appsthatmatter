@@ -7,13 +7,28 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 antialiased">
-  <!-- Container -->
   <div class="container mx-auto px-4 py-10">
     <!-- Header -->
     <header class="mb-8 text-center">
       <h1 class="text-4xl font-bold">AppsThatMatter</h1>
       <p class="text-gray-600 mt-2">A showcase of our handy web-based tools</p>
     </header>
+
+    <!-- Search & Category Filter -->
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="🔍 Search apps..."
+        class="w-full sm:w-1/2 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-indigo-300"
+      />
+      <select
+        id="category-filter"
+        class="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-indigo-300"
+      >
+        <option value="All">All Categories</option>
+      </select>
+    </div>
 
     <!-- App Grid -->
     <main id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -22,12 +37,10 @@
   </div>
 
   <script>
-    // Define your apps here
     const apps = [
       {
         name: 'EMI Calculator',
         description: 'Calculate your monthly EMI effortlessly.',
-        // Inline Heroicon: calculator
         icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-indigo-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                    d="M8 2h8a2 2 0 012 2v16a2 2 0 01-2 2H8a2 2 0 01-2-2V4a2 2 0 012-2z" />
@@ -40,7 +53,6 @@
       {
         name: 'Markdown Reader',
         description: 'Preview and read Markdown files with ease.',
-        // Inline Heroicon: document-text
         icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                    d="M7 8h10M7 12h4m-4 4h10" />
@@ -52,28 +64,61 @@
       }
     ];
 
-    // Renders each app as a card
-    function renderApps() {
-      const grid = document.getElementById('app-grid');
-      apps.forEach(app => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-lg shadow-sm p-6 flex flex-col hover:shadow-lg transition-shadow';
-        card.innerHTML = `
-          <div class="flex-shrink-0">${app.icon}</div>
-          <h2 class="text-xl font-semibold mb-2">${app.name}</h2>
-          <p class="text-gray-600 flex-grow">${app.description}</p>
-          <span class="inline-block bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full mt-4">
-            ${app.category}
-          </span>
-          <a href="${app.url}" class="mt-6 inline-block text-indigo-600 hover:underline font-medium">
-            Open App →
-          </a>
-        `;
-        grid.appendChild(card);
+    // Populate category dropdown with unique categories
+    function populateCategoryFilter() {
+      const select = document.getElementById('category-filter');
+      const categories = ['All', ...new Set(apps.map(a => a.category))];
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        select.appendChild(opt);
       });
     }
 
-    document.addEventListener('DOMContentLoaded', renderApps);
+    // Render apps based on search + category filter
+    function renderApps() {
+      const grid = document.getElementById('app-grid');
+      const term = document.getElementById('search-input').value.toLowerCase();
+      const category = document.getElementById('category-filter').value;
+      grid.innerHTML = '';
+
+      apps
+        .filter(app => {
+          const matchesSearch =
+            app.name.toLowerCase().includes(term) ||
+            app.description.toLowerCase().includes(term);
+          const matchesCategory = category === 'All' || app.category === category;
+          return matchesSearch && matchesCategory;
+        })
+        .forEach(app => {
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-lg shadow-sm p-6 flex flex-col hover:shadow-lg transition-shadow';
+          card.innerHTML = `
+            <div class="flex-shrink-0">${app.icon}</div>
+            <h2 class="text-xl font-semibold mb-2">${app.name}</h2>
+            <p class="text-gray-600 flex-grow">${app.description}</p>
+            <span class="inline-block bg-gray-200 text-gray-800 text-xs font-medium px-2 py-1 rounded-full mt-4">
+              ${app.category}
+            </span>
+            <a href="${app.url}" class="mt-6 inline-block text-indigo-600 hover:underline font-medium">
+              Open App →
+            </a>
+          `;
+          grid.appendChild(card);
+        });
+
+      if (!grid.children.length) {
+        grid.innerHTML = `<p class="col-span-full text-center text-gray-500">No apps found.</p>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateCategoryFilter();
+      renderApps();
+      document.getElementById('search-input').addEventListener('input', renderApps);
+      document.getElementById('category-filter').addEventListener('change', renderApps);
+    });
   </script>
 </body>
 </html>
