@@ -42,6 +42,9 @@
 
     <!-- Right Panel: Output -->
     <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6 flex flex-col">
+      <div class="flex justify-end mb-2">
+        <button onclick="copySettings()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Copy Settings</button>
+      </div>
       <h2 class="text-xl font-semibold mb-2">Prompt Settings Output</h2>
       <textarea id="outputBox" class="flex-grow w-full p-4 neumorphic-inset rounded-lg resize-none text-sm" placeholder="[settings]\nCategory: Option1 | Option2" readonly></textarea>
     </section>
@@ -117,6 +120,11 @@
         }
       }
       outputBox.value = output.trim();
+    }
+
+    function copySettings() {
+      navigator.clipboard.writeText(outputBox.value);
+      alert('Settings copied to clipboard!');
     }
   </script>
 </body>
