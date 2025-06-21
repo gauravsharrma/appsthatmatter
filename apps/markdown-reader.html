@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,8 +10,8 @@
   <meta property="og:title" content="Markdown to HTML Converter - Apps That Matter" />
   <meta property="og:description" content="Convert Markdown to responsive HTML with filters and live preview. Modern, SEO-ready, mobile-first UI." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/apps/markdown-converter.html" />
-  <link rel="canonical" href="https://yourdomain.com/apps/markdown-converter.html" />
+  <meta property="og:url" content="https://yourdomain.com/apps/markdown-reader.html" />
+  <link rel="canonical" href="https://yourdomain.com/apps/markdown-reader.html" />
   <title>Markdown to HTML Converter | Apps That Matter</title>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,9 +21,17 @@
     .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
   </style>
 </head>
+
 <body class="min-h-screen px-4 md:px-10 py-8">
+  <!-- Header with Breadcrumb -->
   <header class="fixed top-0 w-full z-20 neumorphic py-4">
-    <h1 class="text-center text-2xl font-bold">Markdown to HTML Converter</h1>
+    <div class="max-w-7xl mx-auto px-4">
+      <nav class="flex justify-center space-x-2 items-center">
+        <a href="../index.html" class="text-xl font-bold hover:underline">Apps That Matter</a>
+        <span class="text-gray-500">&gt;</span>
+        <a href="markdown-reader.html" class="text-xl font-bold hover:underline">Markdown Reader</a>
+      </nav>
+    </div>
   </header>
 
   <main class="pt-28 max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-6">
@@ -47,7 +56,6 @@
   <script>
     document.getElementById('convertBtn').addEventListener('click', () => {
       const md = document.getElementById('markdownInput').value;
-      // Simple Markdown to HTML using marked if available or fallback
       let html;
       if (window.marked) {
         html = marked(md);
