@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Grammar Inspector: Paste text to highlight and correct grammar errors in real time. Modern, SEO-optimized, mobile-first, neumorphic UI." />
-  <meta name="keywords" content="grammar inspector, grammar checker, text correction, writing tool, AI editor, Apps That Matter" />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Grammar Inspector - Apps That Matter" />
-  <meta property="og:description" content="Paste your text to find and fix grammar mistakes instantly with our interactive inspector." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/apps/grammar-inspector.html" />
-  <link rel="canonical" href="https://yourdomain.com/apps/grammar-inspector.html" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Grammar Inspector: Paste text to highlight and correct grammar errors instantly. SEO-optimized, responsive, and mobile-first UI." />
+  <meta name="keywords" content="grammar checker, grammar inspector, writing tool, text correction, AI editor, Apps That Matter" />
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Grammar Inspector - Apps That Matter">
+  <meta property="og:description" content="Paste your text to find and fix grammar mistakes with our interactive inspector." />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/apps/grammar-inspector.html">
+  <link rel="canonical" href="https://yourdomain.com/apps/grammar-inspector.html">
   <title>Grammar Inspector | Apps That Matter</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Merriweather', serif; background: #e0e5ec; }
     .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; }
     .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+    .highlight { background-color: #ffef99; }
   </style>
 </head>
 <body class="min-h-screen px-4 md:px-10 py-8">
@@ -26,14 +27,14 @@
   </header>
 
   <main class="pt-28 max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-6">
-    <!-- Left Panel: Input Text -->
+    <!-- Input Panel -->
     <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6 flex flex-col">
       <h2 class="text-xl font-semibold mb-2">Enter Text</h2>
       <textarea id="inputText" class="flex-grow w-full p-4 neumorphic-inset rounded-lg resize-none text-sm" placeholder="Paste or type your text here..."></textarea>
       <button id="checkBtn" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Check Grammar</button>
     </section>
 
-    <!-- Right Panel: Corrections -->
+    <!-- Output Panel -->
     <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6 flex flex-col">
       <div class="flex justify-between items-center mb-2">
         <h2 class="text-xl font-semibold">Corrected Text</h2>
@@ -50,13 +51,16 @@
 
   <script>
     document.getElementById('checkBtn').addEventListener('click', () => {
-      const text = document.getElementById('inputText').value;
+      let text = document.getElementById('inputText').value;
       if (!text.trim()) return;
-      // Simple placeholder: highlight basic mistakes (e.g., double spaces)
-      let corrected = text.replace(/\s{2,}/g, ' ');
-      corrected = corrected.replace(/\bi\b/g, 'I');
-      // You can integrate an API for advanced checking
-      document.getElementById('output').innerHTML = corrected.replace(/(\w+)/g, '<span>$1</span> ');
+      // Basic grammar corrections
+      text = text.replace(/\b(i)\b/g, 'I');
+      text = text.replace(/\s+,/g, ',');
+      text = text.replace(/\s+\./g, '.');
+      // Highlight sentences
+      const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+      const outputHtml = sentences.map(s => `<p>${s.trim()}</p>`).join('');
+      document.getElementById('output').innerHTML = outputHtml;
     });
     document.getElementById('copyBtn').addEventListener('click', () => {
       const range = document.createRange();
