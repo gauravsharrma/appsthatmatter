@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Apps That Matter: Discover and launch powerful web apps like Prompt Settings Generator, Markdown Converter, Grammar Inspector, and more. Responsive, SEO-optimized, mobile-first design with neumorphic UI." />
-  <meta name="keywords" content="web apps, AI tools, prompt generator, markdown converter, grammar inspector, neumorphic UI, responsive" />
+  <meta name="description" content="Apps That Matter: Discover and launch powerful web apps like Prompt Settings Generator and Markdown Reader. Responsive, SEO-optimized, mobile-first design with neumorphic UI." />
+  <meta name="keywords" content="web apps, AI tools, prompt generator, markdown reader, neumorphic UI, responsive" />
   <meta name="robots" content="index, follow" />
   <meta property="og:title" content="Apps That Matter - Home" />
   <meta property="og:description" content="Explore our curated collection of useful web apps for productivity, writing, and AI utilities." />
@@ -20,21 +21,14 @@
     .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
   </style>
 </head>
+
 <body class="min-h-screen px-4 md:px-10 py-8">
-  <!-- Site Header with Breadcrumb -->
+  <!-- Site Header -->
   <header class="fixed top-0 w-full z-20 neumorphic py-4">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-center gap-2 md:justify-between">
-      <div class="flex items-center space-x-2">
-        <a href="index.html" class="text-xl font-bold hover:underline">Apps That Matter</a>
-        <!-- Home has no parent, so no '>' in breadcrumb -->
-      </div>
-      <nav class="hidden md:flex space-x-4">
-        <a href="#" class="px-3 py-1 neumorphic-inset rounded hover:bg-gray-100">AI Tools</a>
-        <a href="#" class="px-3 py-1 neumorphic-inset rounded hover:bg-gray-100">Utilities</a>
-        <a href="#" class="px-3 py-1 neumorphic-inset rounded hover:bg-gray-100">Writing</a>
-      </nav>
+    <div class="max-w-7xl mx-auto text-center">
+      <a href="index.html" class="text-2xl font-bold hover:underline">Apps That Matter</a>
     </div>
-    <!-- Filter & Search centered on desktop -->
+    <!-- Centered Filter & Search -->
     <div class="mt-4">
       <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-4 justify-center">
         <div class="flex items-center space-x-2">
@@ -52,50 +46,46 @@
   </header>
 
   <!-- Main Content -->
-  <main class="pt-36 max-w-screen-xl mx-auto space-y-6">
-    <div id="appGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      <!-- Example Card -->
-      <a href="apps/prompt-settings.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
-        <h2 class="text-lg font-bold mb-1">Prompt Settings Generator</h2>
-        <p class="text-sm text-gray-700 mb-2">Generate LLM prompt configuration settings via Excel upload.</p>
-        <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">AI Tools</span>
-      </a>
-      <!-- Additional cards here -->
-    </div>
+  <main class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <a href="apps/prompt-settings.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+      <h2 class="text-lg font-bold mb-1">Prompt Settings Generator</h2>
+      <p class="text-sm text-gray-700 mb-2">Generate LLM prompt configuration settings via Excel upload.</p>
+      <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">AI Tools</span>
+    </a>
+    <a href="apps/markdown-reader.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+      <h2 class="text-lg font-bold mb-1">Markdown Reader</h2>
+      <p class="text-sm text-gray-700 mb-2">Convert Markdown to responsive HTML with live preview.</p>
+      <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">Utilities</span>
+    </a>
+    <!-- Removed Grammar Inspector card -->
   </main>
 
-  <!-- Scripts -->
   <script>
     const apps = [
-      { name: "Prompt Settings Generator", category: "AI Tools", description: "Generate LLM prompt configuration settings via Excel upload.", link: "apps/prompt-settings.html" },
-      { name: "Markdown to HTML Converter", category: "Utilities", description: "Convert Markdown to responsive HTML with live preview.", link: "apps/markdown-converter.html" },
-      { name: "Grammar Inspector", category: "Writing", description: "Highlight and fix grammar issues with an interactive editor.", link: "apps/grammar-inspector.html" }
+      { name: "Prompt Settings Generator", category: "AI Tools", description: "Generate LLM prompt settings via Excel upload.", link: "apps/prompt-settings.html" },
+      { name: "Markdown Reader", category: "Utilities", description: "Convert Markdown to responsive HTML with live preview.", link: "apps/markdown-reader.html" }
     ];
-
-    const grid = document.getElementById('appGrid');
+    const grid = document.querySelector('main');
     const filter = document.getElementById('categoryFilter');
     const search = document.getElementById('search');
-
-    function renderApps() {
+    function render() {
       const term = search.value.toLowerCase();
       const cat = filter.value;
       grid.innerHTML = '';
-      apps.filter(a => (cat === 'all' || a.category === cat)
-        && (a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term)))
-        .forEach(a => {
-          const el = document.createElement('a');
-          el.href = a.link; el.target = '_blank';
-          el.className = 'neumorphic p-4 rounded-xl hover:scale-105 transition';
-          el.innerHTML = `<h2 class="text-lg font-bold mb-1">${a.name}</h2>
-                          <p class="text-sm text-gray-700 mb-2">${a.description}</p>
-                          <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">${a.category}</span>`;
+      apps.filter(a => (cat==='all'||a.category===cat)
+        && (a.name.toLowerCase().includes(term)||a.description.toLowerCase().includes(term)))
+        .forEach(a=>{
+          const el = document.createElement('a'); el.href=a.link; el.target='_blank';
+          el.className='neumorphic p-4 rounded-xl hover:scale-105 transition';
+          el.innerHTML=`<h2 class="text-lg font-bold mb-1">${a.name}</h2>
+            <p class="text-sm text-gray-700 mb-2">${a.description}</p>
+            <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">${a.category}</span>`;
           grid.appendChild(el);
         });
     }
-
-    filter.addEventListener('change', renderApps);
-    search.addEventListener('input', renderApps);
-    renderApps();
+    filter.addEventListener('change',render);
+    search.addEventListener('input',render);
+    render();
   </script>
 </body>
 </html>
