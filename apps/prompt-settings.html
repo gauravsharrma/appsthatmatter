@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Upload and generate exhaustive prompt settings for ChatGPT, Gemini, Claude, and more." />
-  <meta name="keywords" content="Prompt Settings, ChatGPT, Gemini, Claude, LLM configuration, AI prompts, Excel to prompt generator" />
-  <meta name="author" content="Your Name" />
-  <title>Prompt Settings Generator</title>
+  <meta name="description" content="Generate exhaustive LLM prompt settings for ChatGPT, Gemini, Claude, and other AI tools. Responsive, SEO-optimized prompt settings generator UI." />
+  <meta name="keywords" content="Prompt Settings Generator, ChatGPT prompts, AI prompt builder, LLM tools, SEO-ready prompt templates, prompt configuration, OpenAI" />
+  <meta name="author" content="Prompt Master" />
+  <title>Prompt Settings Generator | ChatGPT, Claude, Gemini</title>
+  <link rel="canonical" href="https://yourdomain.com/apps/prompt-settings.html" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
     body {
       font-family: 'Merriweather', serif;
@@ -26,96 +26,103 @@
     .neumorphic-inset {
       box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff;
     }
+
+    .tag {
+      @apply px-3 py-1 m-1 text-sm rounded-xl cursor-pointer transition-all;
+    }
+
+    .tag:hover {
+      @apply bg-blue-100;
+    }
+
+    .tag.active {
+      @apply bg-blue-200 font-semibold;
+    }
   </style>
 </head>
 
-<body class="min-h-screen text-gray-800">
-  <header class="neumorphic px-6 py-4 fixed w-full z-10 text-center">
-    <h1 class="text-2xl font-bold">Prompt Settings Generator</h1>
+<body class="min-h-screen px-2 md:px-10 py-6">
+  <header class="neumorphic p-4 text-center text-2xl font-bold sticky top-0 z-10">
+    Prompt Settings Generator
   </header>
 
-  <main class="pt-32 px-4 md:px-10 lg:px-24 max-w-screen-xl mx-auto">
-    <div class="text-sm text-blue-600 underline mb-2">
-      <a href="OpenAI_Exhaustive_Human_Prompt_Settings.xlsx" download>⬇ Download Sample Excel File</a>
+  <div class="text-sm text-center mt-4">
+    ↓ <a href="OpenAI_Exhaustive_Human_Prompt_Settings.xlsx" class="text-blue-600 underline">Download Sample Excel File</a>
+  </div>
+
+  <main class="mt-6 flex flex-col lg:flex-row gap-4">
+    <div id="settingsPanel" class="w-full lg:w-1/2 h-[80vh] overflow-y-auto p-4 neumorphic">
+      <h2 class="text-xl font-semibold mb-2">Choose Settings</h2>
+      <input type="file" id="fileInput" class="mb-4" />
+      <div id="settingsContainer"></div>
     </div>
-
-    <div class="flex flex-col lg:flex-row gap-6">
-      <!-- Left Panel -->
-      <div class="w-full lg:w-1/2 h-[80vh] overflow-y-auto p-4 neumorphic">
-        <h2 class="text-lg font-bold mb-4">Choose Settings</h2>
-        <input type="file" id="fileInput" accept=".xlsx,.xls" class="mb-4" />
-        <div id="settingsPanel" class="text-sm">Parsing and rendering settings...</div>
-      </div>
-
-      <!-- Right Panel -->
-      <div class="w-full lg:w-1/2 h-[80vh] overflow-y-auto p-4 neumorphic">
-        <h2 class="text-lg font-bold mb-4">Prompt Settings Output</h2>
-        <textarea id="outputBox" class="w-full h-[calc(100%-2rem)] p-4 neumorphic-inset" readonly></textarea>
-      </div>
+    <div class="w-full lg:w-1/2 h-[80vh] overflow-y-auto p-4 neumorphic">
+      <h2 class="text-xl font-semibold mb-2">Prompt Settings Output</h2>
+      <textarea id="output" class="w-full h-full p-4 neumorphic-inset" readonly></textarea>
     </div>
   </main>
 
   <script>
-    const fileInput = document.getElementById('fileInput');
-    const settingsPanel = document.getElementById('settingsPanel');
-    const outputBox = document.getElementById('outputBox');
+    const fileInput = document.getElementById("fileInput");
+    const settingsContainer = document.getElementById("settingsContainer");
+    const output = document.getElementById("output");
+    const selections = {};
 
-    fileInput.addEventListener('change', handleFile);
-
-    function handleFile(event) {
-      const file = event.target.files[0];
+    fileInput.addEventListener("change", async (e) => {
+      const file = e.target.files[0];
       if (!file) return;
+      const data = await file.arrayBuffer();
+      const workbook = await window.XLSX.read(data, { type: "array" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const json = window.XLSX.utils.sheet_to_json(sheet);
+      renderTags(json);
+    });
 
-      settingsPanel.innerHTML = '<p>Parsing and rendering settings...</p>';
+    function renderTags(data) {
+      settingsContainer.innerHTML = "";
+      const categories = {};
+      data.forEach(row => {
+        if (!categories[row.Category]) categories[row.Category] = [];
+        categories[row.Category].push(row.Option);
+      });
 
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        try {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      for (let category in categories) {
+        const section = document.createElement("div");
+        section.className = "mb-4";
+        section.innerHTML = `<h3 class='font-bold mb-1'>${category}</h3>`;
+        const wrapper = document.createElement("div");
+        wrapper.className = "flex flex-wrap";
 
-          if (!jsonData || jsonData.length === 0 || jsonData[0].length === 0) {
-            settingsPanel.innerHTML = '<p class="text-red-600">⚠️ No data found in the uploaded file.</p>';
-            return;
-          }
-
-          const categories = jsonData[0].slice(1); // skip first column (label)
-          let html = '';
-          for (let r = 1; r < jsonData.length; r++) {
-            const row = jsonData[r];
-            const label = row[0];
-            if (!label) continue;
-            html += `<div class="mb-3"><h3 class="font-semibold mb-1">${label}</h3><div class="flex flex-wrap gap-2">`;
-            for (let c = 1; c < row.length; c++) {
-              if (row[c]) {
-                html += `<button onclick="toggleTag(this)" class="px-3 py-1 rounded-full neumorphic cursor-pointer">${row[c]}</button>`;
-              }
+        categories[category].forEach(option => {
+          const tag = document.createElement("div");
+          tag.className = "tag neumorphic-inset";
+          tag.textContent = option;
+          tag.onclick = () => {
+            tag.classList.toggle("active");
+            if (!selections[category]) selections[category] = new Set();
+            if (tag.classList.contains("active")) {
+              selections[category].add(option);
+            } else {
+              selections[category].delete(option);
             }
-            html += '</div></div>';
-          }
-
-          settingsPanel.innerHTML = html;
-        } catch (err) {
-          settingsPanel.innerHTML = '<p class="text-red-600">❌ Error parsing file. Please upload a valid Excel file.</p>';
-        }
-      };
-      reader.readAsArrayBuffer(file);
-    }
-
-    function toggleTag(button) {
-      button.classList.toggle('bg-blue-100');
-      updateOutput();
+            updateOutput();
+          };
+          wrapper.appendChild(tag);
+        });
+        section.appendChild(wrapper);
+        settingsContainer.appendChild(section);
+      }
     }
 
     function updateOutput() {
-      const tags = document.querySelectorAll('#settingsPanel button.bg-blue-100');
-      const text = Array.from(tags).map(tag => tag.textContent).join(' | ');
-      outputBox.value = text;
+      const merged = Object.values(selections)
+        .map(set => Array.from(set).join(" | "))
+        .filter(Boolean)
+        .join("\n");
+      output.value = merged;
     }
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 
 </html>
