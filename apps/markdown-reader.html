@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive Markdown to HTML Converter. Paste or upload Markdown, filter tables, and get responsive HTML. SEO-optimized, mobile-first, neumorphic UI." />
+  <meta name="keywords" content="Markdown to HTML, Markdown converter, responsive tables, AI utilities, neumorphic UI, Apps That Matter" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Markdown to HTML Converter - Apps That Matter" />
+  <meta property="og:description" content="Convert Markdown to responsive HTML with filters and live preview. Modern, SEO-ready, mobile-first UI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/apps/markdown-converter.html" />
+  <link rel="canonical" href="https://yourdomain.com/apps/markdown-converter.html" />
+  <title>Markdown to HTML Converter | Apps That Matter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Merriweather', serif; background: #e0e5ec; }
+    .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; }
+    .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+  </style>
+</head>
+<body class="min-h-screen px-4 md:px-10 py-8">
+  <header class="fixed top-0 w-full z-20 neumorphic py-4">
+    <h1 class="text-center text-2xl font-bold">Markdown to HTML Converter</h1>
+  </header>
+
+  <main class="pt-28 max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-6">
+    <!-- Input Panel -->
+    <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6">
+      <h2 class="text-xl font-semibold mb-4">Enter Markdown</h2>
+      <textarea id="markdownInput" class="w-full h-3/5 p-4 neumorphic-inset rounded-lg resize-none" placeholder="Paste your Markdown here..."></textarea>
+      <div class="mt-4 flex gap-2">
+        <button id="convertBtn" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">Convert to HTML</button>
+        <button id="copyHtmlBtn" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded">Copy HTML</button>
+      </div>
+    </section>
+
+    <!-- Preview Panel -->
+    <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6">
+      <h2 class="text-xl font-semibold mb-4">HTML Output & Preview</h2>
+      <textarea id="htmlOutput" class="w-full h-1/3 p-4 neumorphic-inset rounded-lg resize-none text-sm mb-4" readonly></textarea>
+      <div id="preview" class="p-4 neumorphic-inset rounded-lg h-2/3 overflow-auto bg-white"></div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('convertBtn').addEventListener('click', () => {
+      const md = document.getElementById('markdownInput').value;
+      // Simple Markdown to HTML using marked if available or fallback
+      let html;
+      if (window.marked) {
+        html = marked(md);
+      } else {
+        html = md
+          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+          .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+          .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+          .replace(/\*(.*)\*/gim, '<em>$1</em>')
+          .replace(/\n$/gim, '<br />');
+      }
+      document.getElementById('htmlOutput').value = html;
+      document.getElementById('preview').innerHTML = html;
+    });
+    document.getElementById('copyHtmlBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('htmlOutput').value);
+      alert('HTML copied to clipboard!');
+    });
+  </script>
+</body>
+</html>
