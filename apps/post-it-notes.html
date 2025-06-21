@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Temporary Post-It Notes app: jot down quick notes saved in your browser. Download notes as JSON, Markdown, or plain text. Responsive, SEO-optimized, mobile-first neumorphic UI." />
+  <meta name="keywords" content="post it notes, sticky notes, local storage, notes app, download notes, neumorphic UI" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Post-It Notes - Apps That Matter" />
+  <meta property="og:description" content="Use our temporary Post-It Notes app to capture and download your notes in JSON, Markdown, or text formats. Note: stored locally only." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/apps/post-it-notes.html" />
+  <link rel="canonical" href="https://yourdomain.com/apps/post-it-notes.html" />
+  <title>Post-It Notes | Apps That Matter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Merriweather', serif; background: #e0e5ec; }
+    .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; }
+    .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+  </style>
+</head><body class="min-h-screen px-4 md:px-10 py-8">
+  <!-- Header with Breadcrumb -->
+  <header class="fixed top-0 w-full z-20 neumorphic py-4">
+    <div class="max-w-7xl mx-auto px-4">
+      <nav class="flex justify-center space-x-2 items-center">
+        <a href="../index.html" class="text-xl font-bold hover:underline">Apps That Matter</a>
+        <span class="text-gray-500">&gt;</span>
+        <a href="post-it-notes.html" class="text-xl font-bold hover:underline">Post-It Notes</a>
+      </nav>
+    </div>
+  </header>  <main class="pt-28 max-w-screen-xl mx-auto">
+    <section class="neumorphic p-6 mb-6">
+      <h1 class="text-2xl font-bold mb-2 text-center">Post-It Notes</h1>
+      <p class="text-center text-gray-600 mb-4">Note: Your notes are stored <strong>temporarily</strong> in your browser's local storage. Clear cache to remove.</p>
+      <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <textarea id="noteInput" placeholder="Write a new note..." class="flex-grow p-4 neumorphic-inset rounded-lg resize-none h-32"></textarea>
+        <button id="addNoteBtn" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded neumorphic transition">Add Note</button>
+      </div>
+      <div class="flex flex-wrap gap-4" id="notesContainer"></div>
+    </section><section class="neumorphic p-6">
+  <h2 class="text-xl font-semibold mb-4">Export Notes</h2>
+  <div class="flex flex-wrap gap-4">
+    <button id="downloadJsonBtn" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded neumorphic transition">Download JSON</button>
+    <button id="downloadMdBtn" class="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded neumorphic transition">Download Markdown</button>
+    <button id="downloadTxtBtn" class="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded neumorphic transition">Download Text</button>
+    <button id="clearAllBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded neumorphic transition">Clear All</button>
+  </div>
+</section>
+
+  </main>  <script>
+    const noteInput = document.getElementById('noteInput');
+    const addNoteBtn = document.getElementById('addNoteBtn');
+    const notesContainer = document.getElementById('notesContainer');
+    const downloadJsonBtn = document.getElementById('downloadJsonBtn');
+    const downloadMdBtn = document.getElementById('downloadMdBtn');
+    const downloadTxtBtn = document.getElementById('downloadTxtBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+
+    let notes = JSON.parse(localStorage.getItem('postItNotes') || '[]');
+
+    function saveNotes() {
+      localStorage.setItem('postItNotes', JSON.stringify(notes));
+    }
+
+    function renderNotes() {
+      notesContainer.innerHTML = '';
+      notes.forEach((note, idx) => {
+        const div = document.createElement('div');
+        div.className = 'neumorphic p-4 rounded-lg flex-1 min-w-[200px]';
+        div.innerHTML = `<p class=\"whitespace-pre-wrap\">${note}</p><button data-idx=\"${idx}\" class=\"mt-2 text-red-500 hover:underline deleteBtn\">Delete</button>`;
+        notesContainer.appendChild(div);
+      });
+      document.querySelectorAll('.deleteBtn').forEach(btn => btn.addEventListener('click', e => {
+        notes.splice(e.target.dataset.idx, 1);
+        saveNotes(); renderNotes();
+      }));
+    }
+
+    addNoteBtn.addEventListener('click', () => {
+      const text = noteInput.value.trim();
+      if (!text) return;
+      notes.push(text);
+      noteInput.value = '';
+      saveNotes(); renderNotes();
+    });
+
+    downloadJsonBtn.addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'notes.json'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    downloadMdBtn.addEventListener('click', () => {
+      const md = notes.map(n => `- ${n}`).join('\n');
+      const blob = new Blob([md], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'notes.md'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    downloadTxtBtn.addEventListener('click', () => {
+      const txt = notes.join('\n---\n');
+      const blob = new Blob([txt], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'notes.txt'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+      if (confirm('Clear all notes? This cannot be undone.')) {
+        notes = []; saveNotes(); renderNotes();
+      }
+    });
+
+    // Initial render
+    renderNotes();
+  </script></body></html>
