@@ -43,7 +43,7 @@
     <!-- Right Panel: Output -->
     <section class="w-full lg:w-1/2 h-[80vh] overflow-y-auto neumorphic p-6 flex flex-col">
       <h2 class="text-xl font-semibold mb-2">Prompt Settings Output</h2>
-      <textarea id="outputBox" class="flex-grow w-full p-4 neumorphic-inset rounded-lg resize-none text-sm" placeholder="Selected settings will appear here..." readonly></textarea>
+      <textarea id="outputBox" class="flex-grow w-full p-4 neumorphic-inset rounded-lg resize-none text-sm" placeholder="[settings]\nCategory: Option1 | Option2" readonly></textarea>
     </section>
   </main>
 
@@ -78,7 +78,6 @@
             return;
           }
 
-          // Build UI: skip header row
           let html = '';
           for (let i = 1; i < rows.length; i++) {
             const [category, ...options] = rows[i];
@@ -111,11 +110,13 @@
     }
 
     function updateOutput() {
-      const lines = [];
-      for (const [cat, opts] of Object.entries(selections)) {
-        if (opts.size) lines.push(`${[...opts].join(' | ')}`);
+      let output = "[settings]\n";
+      for (const [category, opts] of Object.entries(selections)) {
+        if (opts.size) {
+          output += `${category}: ${[...opts].join(' | ')}\n`;
+        }
       }
-      outputBox.value = lines.join('\n');
+      outputBox.value = output.trim();
     }
   </script>
 </body>
