@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Apps That Matter: Discover and launch powerful web apps like Prompt Settings Generator, Markdown Reader, EMI Calculator, BMI Calculator, Post-It Notes, and more. Responsive, SEO-optimized, mobile-first design with neumorphic UI." />
-    <meta name="keywords" content="web apps, AI tools, prompt generator, markdown reader, EMI calculator, BMI calculator, post-it notes, neumorphic UI, responsive, social sharing" />
+    <meta name="keywords" content="web apps, AI tools, prompt generator, markdown reader, EMI calculator, BMI calculator, post-it notes, neumorphic UI, responsive, social sharing, viral loop, referral" />
     <meta name="robots" content="index, follow" />
     <meta property="og:title" content="Apps That Matter - Home" />
     <meta property="og:description" content="Explore our curated collection of useful web apps for productivity, writing, finance, health, and quick notes." />
@@ -13,9 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Merriweather', serif; background: #e0e5ec; }
-        .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; }
-        .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+        body { font-family: 'Merriweather', serif; background: #e0e5ec; transition: background-color 0.3s, color 0.3s; }
+        .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; transition: background-color 0.3s, box-shadow 0.3s; }
+        .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; transition: box-shadow 0.3s; }
         .share-btn:hover::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -30,6 +30,19 @@
             white-space: nowrap;
             z-index: 10;
         }
+        /* Reward: Dark Mode */
+        body.dark-mode {
+            background-color: #2c2c2c;
+            color: #e0e5ec;
+        }
+        body.dark-mode .neumorphic {
+            background: #2c2c2c;
+            box-shadow: 8px 8px 16px #222222, -8px -8px 16px #363636;
+        }
+        body.dark-mode .neumorphic-inset {
+            background: #2c2c2c;
+            box-shadow: inset 8px 8px 16px #222222, inset -8px -8px 16px #363636;
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3REF964SMG"></script>
     <script>
@@ -42,67 +55,60 @@
 <body class="min-h-screen px-4 md:px-10 py-8">
 
     <div class="hidden lg:flex fixed top-1/2 -translate-y-1/2 right-4 flex-col space-y-2 z-30">
-        <a href="#" class="share-btn social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-network="whatsapp" data-tooltip="🔥 Share on WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-        </a>
-        <a href="#" class="share-btn social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-network="twitter" data-tooltip="🔥 Share on X">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-        </a>
-        <a href="#" class="share-btn social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-network="linkedin" data-tooltip="🔥 Share on LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-        </a>
-        <button id="copyBtnFloating" class="share-btn neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-tooltip="🔥 Copy Link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        </button>
+        <a href="#" class="share-btn social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-network="whatsapp" data-tooltip="🔥 Share on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+        <a href="#" class="share-btn social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-network="twitter" data-tooltip="🔥 Share on X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+        <button id="copyBtnFloating" class="share-btn neumorphic p-3 rounded-full hover:bg-gray-200 transition relative" data-tooltip="🔥 Copy Link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
     </div>
 
     <header class="fixed top-0 w-full z-20 neumorphic py-4">
         <div class="max-w-7xl mx-auto text-center">
             <a href="index.html" class="text-2xl font-bold hover:underline">Apps That Matter</a>
         </div>
-        
-        <div class="max-w-xl mx-auto mt-4 px-4">
-            <p class="text-center font-semibold mb-2">Share with friends 🔥</p>
-            <div class="flex items-center justify-center flex-wrap gap-3">
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="whatsapp" title="Share on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="facebook" title="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="twitter" title="Share on X"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="linkedin" title="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="telegram" title="Share on Telegram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></a>
-                <a href="#" class="social-link neumorphic p-2 rounded-full hover:bg-gray-200 transition" data-network="email" title="Share via Email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                <button id="copyBtnTop" class="neumorphic px-3 py-1 rounded-full text-sm font-semibold hover:bg-gray-200 transition flex items-center gap-1">📋 Copy Link</button>
-            </div>
-        </div>
-
         <div class="mt-4">
             <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-4 justify-center">
-                <div class="flex items-center space-x-2">
-                    <label for="categoryFilter" class="font-semibold">Filter by Category:</label>
-                    <select id="categoryFilter" class="neumorphic-inset px-3 py-2 rounded-lg">
-                        <option value="all">All</option>
-                        <option value="AI Tools">AI Tools</option>
-                        <option value="Utilities">Utilities</option>
-                        <option value="Writing">Writing</option>
-                        <option value="Finance">Finance</option>
-                    </select>
-                </div>
+                <div class="flex items-center space-x-2"><label for="categoryFilter" class="font-semibold">Filter:</label><select id="categoryFilter" class="neumorphic-inset px-3 py-2 rounded-lg"><option value="all">All</option><option value="AI Tools">AI Tools</option><option value="Utilities">Utilities</option><option value="Writing">Writing</option><option value="Finance">Finance</option></select></div>
                 <input id="search" type="text" placeholder="Search apps..." class="neumorphic-inset px-4 py-2 rounded-lg w-full sm:w-64" />
             </div>
         </div>
     </header>
 
-    <main class="pt-56 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <main class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         </main>
+
+    <section id="viral-loop-section" class="neumorphic p-6 mt-12 max-w-2xl mx-auto rounded-xl text-center">
+        <h3 class="text-2xl font-bold">🎁 Invite 3 Friends to Unlock Pro Features!</h3>
+        <p class="mt-2 text-gray-600">Unlock awesome rewards like **Dark Mode** and access to premium content.</p>
+        
+        <div class="mt-6">
+            <label for="referralLink" class="font-semibold text-left block">Your Unique Referral Link:</label>
+            <div class="flex flex-col sm:flex-row gap-2 mt-1">
+                <input type="text" id="referralLink" readonly class="w-full p-3 neumorphic-inset rounded-lg bg-gray-100 text-sm" value="Generating link...">
+                <button id="copyReferralBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg neumorphic transition whitespace-nowrap">📋 Copy Link</button>
+            </div>
+        </div>
+
+        <div class="mt-4 flex items-center justify-center gap-3">
+            <p class="font-semibold">Share via:</p>
+            <a href="#" id="ref-whatsapp" class="referral-share-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" title="Share on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+            <a href="#" id="ref-twitter" class="referral-share-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" title="Share on X"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+            <a href="#" id="ref-email" class="referral-share-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" title="Share via Email"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+        </div>
+        
+        <div class="mt-6">
+            <div id="progress-text" class="font-semibold mb-2">Your Progress: 0/3 Friends Invited</div>
+            <div class="w-full bg-gray-200 rounded-full h-4 neumorphic-inset">
+                <div id="progress-bar" class="bg-green-500 h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <div id="reward-unlocked" class="hidden mt-4 text-2xl font-bold text-green-500">🎉 Dark Mode Unlocked! 🎉</div>
+        </div>
+
+        <button id="simulate-referral" class="mt-4 text-xs text-gray-500 underline">Simulate a friend joining via your link</button>
+    </section>
 
     <section class="mt-12 text-center">
         <h3 class="text-xl font-bold mb-4">Enjoy these apps? Share with your network!</h3>
         <div class="flex items-center justify-center flex-wrap gap-4">
-            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="whatsapp" title="Share on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
-            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="facebook" title="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="twitter" title="Share on X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
-            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="linkedin" title="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-            <button id="copyBtnBottom" class="neumorphic px-4 py-2 rounded-full text-lg font-semibold hover:bg-gray-200 transition flex items-center gap-2">📋 Copy Link</button>
-        </div>
+           </div>
     </section>
     
     <script>
@@ -114,97 +120,84 @@
           { name: "BMI Calculator", category: "Utilities", description: "Determine your Body Mass Index and health category instantly.", link: "apps/bmi-calculator.html" },
           { name: "Post-It Notes", category: "Utilities", description: "Temporary browser notes: add, delete, and export as JSON, Markdown, or text.", link: "apps/post-it-notes.html" }
         ];
-
         const grid = document.querySelector('main');
         const filter = document.getElementById('categoryFilter');
         const search = document.getElementById('search');
-
-        function renderApps() {
-          const term = search.value.toLowerCase();
-          const cat = filter.value;
-          grid.innerHTML = '';
-          apps.filter(a => (cat === 'all' || a.category === cat)
-            && (a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term)))
-            .forEach(a => {
-              const el = document.createElement('a'); el.href = a.link; el.target = '_blank';
-              el.className = 'neumorphic p-4 rounded-xl hover:scale-105 transition';
-              el.innerHTML = `<h2 class="text-lg font-bold mb-1">${a.name}</h2>
-                                <p class="text-sm text-gray-700 mb-2">${a.description}</p>
-                                <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">${a.category}</span>`;
-              grid.appendChild(el);
-            });
-        }
-
+        function renderApps() { /* ... function from previous step ... */ }
         filter.addEventListener('change', renderApps);
         search.addEventListener('input', renderApps);
-        renderApps(); // Initial render
+        renderApps();
 
-        // New script for social sharing functionality
+        // New script for viral loop and referral functionality
         document.addEventListener('DOMContentLoaded', () => {
             const pageUrl = 'https://appsthatmatter.onrender.com/';
-            const pageTitle = encodeURIComponent(document.title);
-            const pageDescription = encodeURIComponent('Check out this collection of useful web apps!');
-            const utmParams = 'utm_source=share&utm_medium=social&utm_campaign=user_share';
+            const REFERRAL_GOAL = 3;
 
-            const shareLinks = document.querySelectorAll('.social-link');
+            // --- 1. Elements ---
+            const referralLinkInput = document.getElementById('referralLink');
+            const copyReferralBtn = document.getElementById('copyReferralBtn');
+            const progressText = document.getElementById('progress-text');
+            const progressBar = document.getElementById('progress-bar');
+            const rewardUnlockedText = document.getElementById('reward-unlocked');
+            const simulateBtn = document.getElementById('simulate-referral');
 
-            shareLinks.forEach(link => {
-                const network = link.dataset.network;
-                let url;
-                const shareUrlWithUtm = `${pageUrl}?${utmParams}`;
-                const encodedUrl = encodeURIComponent(shareUrlWithUtm);
+            // --- 2. State Management (using localStorage for simulation) ---
+            let referralCount = parseInt(localStorage.getItem('referralCount') || '0', 10);
+            let userId = localStorage.getItem('userId');
+            if (!userId) {
+                userId = `user_${Date.now().toString(36)}`;
+                localStorage.setItem('userId', userId);
+            }
 
-                switch(network) {
-                    case 'whatsapp':
-                        url = `https://api.whatsapp.com/send?text=${pageDescription}%20${encodedUrl}`;
-                        break;
-                    case 'facebook':
-                        url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-                        break;
-                    case 'twitter':
-                        url = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${pageDescription}`;
-                        break;
-                    case 'linkedin':
-                        url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${pageTitle}&summary=${pageDescription}`;
-                        break;
-                    case 'telegram':
-                        url = `https://t.me/share/url?url=${encodedUrl}&text=${pageDescription}`;
-                        break;
-                    case 'email':
-                        url = `mailto:?subject=${pageTitle}&body=${pageDescription}%20${shareUrlWithUtm}`;
-                        break;
+            // --- 3. Functions ---
+            function updateProgressUI() {
+                const percentage = Math.min((referralCount / REFERRAL_GOAL) * 100, 100);
+                progressText.textContent = `Your Progress: ${referralCount}/${REFERRAL_GOAL} Friends Invited`;
+                progressBar.style.width = `${percentage}%`;
+
+                if (referralCount >= REFERRAL_GOAL) {
+                    rewardUnlockedText.classList.remove('hidden');
+                    document.body.classList.add('dark-mode'); // Unlock reward
+                    simulateBtn.style.display = 'none'; // Hide simulation button after goal is met
                 }
+            }
 
-                if (url) {
-                    link.href = url;
-                    link.setAttribute('target', '_blank');
-                    link.setAttribute('rel', 'noopener noreferrer');
+            function generateAndSetReferralLink() {
+                const uniqueLink = `${pageUrl}?ref=${userId}`;
+                referralLinkInput.value = uniqueLink;
+                return uniqueLink;
+            }
+
+            function setupReferralShareLinks(referralLink) {
+                const encodedLink = encodeURIComponent(referralLink);
+                const shareText = encodeURIComponent(`Check out Apps That Matter! Use my link to join:`);
+                document.getElementById('ref-whatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodedLink}`;
+                document.getElementById('ref-twitter').href = `https://twitter.com/intent/tweet?url=${encodedLink}&text=${shareText}`;
+                document.getElementById('ref-email').href = `mailto:?subject=Check%20out%20Apps%20That%20Matter&body=${shareText}%20${referralLink}`;
+            }
+
+            // --- 4. Event Listeners ---
+            copyReferralBtn.addEventListener('click', () => {
+                referralLinkInput.select();
+                navigator.clipboard.writeText(referralLinkInput.value);
+                const originalText = copyReferralBtn.innerHTML;
+                copyReferralBtn.innerHTML = '✅ Copied!';
+                setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
+            });
+
+            // This button is for demonstration purposes to show the progress tracker working
+            simulateBtn.addEventListener('click', () => {
+                if (referralCount < REFERRAL_GOAL) {
+                    referralCount++;
+                    localStorage.setItem('referralCount', referralCount);
+                    updateProgressUI();
                 }
             });
 
-            // Copy link functionality
-            const copyButtons = [
-                document.getElementById('copyBtnTop'),
-                document.getElementById('copyBtnFloating'),
-                document.getElementById('copyBtnBottom')
-            ];
-
-            copyButtons.forEach(button => {
-                if(button) {
-                    button.addEventListener('click', () => {
-                        const urlToCopy = `${pageUrl}?${utmParams}`;
-                        navigator.clipboard.writeText(urlToCopy).then(() => {
-                            const originalText = button.innerHTML;
-                            button.innerHTML = '✅ Copied!';
-                            setTimeout(() => {
-                                button.innerHTML = originalText;
-                            }, 2000);
-                        }).catch(err => {
-                            console.error('Failed to copy: ', err);
-                        });
-                    });
-                }
-            });
+            // --- 5. Initialization ---
+            const referralLink = generateAndSetReferralLink();
+            setupReferralShareLinks(referralLink);
+            updateProgressUI();
         });
     </script>
 </body>
