@@ -108,11 +108,16 @@
     <section class="mt-12 text-center">
         <h3 class="text-xl font-bold mb-4">Enjoy these apps? Share with your network!</h3>
         <div class="flex items-center justify-center flex-wrap gap-4">
-           </div>
+            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="whatsapp" title="Share on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="facebook" title="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="twitter" title="Share on X"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+            <a href="#" class="social-link neumorphic p-3 rounded-full hover:bg-gray-200 transition" data-network="linkedin" title="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <button id="copyBtnBottom" class="neumorphic px-4 py-2 rounded-full text-lg font-semibold hover:bg-gray-200 transition flex items-center gap-2">📋 Copy Link</button>
+        </div>
     </section>
     
     <script>
-        // Original script for app filtering
+        // --- App Filtering & Rendering Logic ---
         const apps = [
           { name: "Prompt Settings Generator", category: "AI Tools", description: "Generate LLM prompt settings via Excel upload.", link: "apps/prompt-settings.html" },
           { name: "Markdown Reader", category: "Utilities", description: "Convert Markdown to responsive HTML with live preview.", link: "apps/markdown-reader.html" },
@@ -123,17 +128,70 @@
         const grid = document.querySelector('main');
         const filter = document.getElementById('categoryFilter');
         const search = document.getElementById('search');
-        function renderApps() { /* ... function from previous step ... */ }
+
+        function renderApps() {
+            const term = search.value.toLowerCase();
+            const cat = filter.value;
+            grid.innerHTML = '';
+            apps.filter(a => (cat === 'all' || a.category === cat)
+                && (a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term)))
+                .forEach(a => {
+                const el = document.createElement('a'); el.href = a.link; el.target = '_blank';
+                el.className = 'neumorphic p-4 rounded-xl hover:scale-105 transition';
+                el.innerHTML = `<h2 class="text-lg font-bold mb-1">${a.name}</h2>
+                                <p class="text-sm text-gray-700 mb-2">${a.description}</p>
+                                <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">${a.category}</span>`;
+                grid.appendChild(el);
+            });
+        }
         filter.addEventListener('change', renderApps);
         search.addEventListener('input', renderApps);
-        renderApps();
+        
 
-        // New script for viral loop and referral functionality
+        // --- All other feature scripts run after DOM is loaded ---
         document.addEventListener('DOMContentLoaded', () => {
-            const pageUrl = 'https://appsthatmatter.onrender.com/';
-            const REFERRAL_GOAL = 3;
+            // Initial render of app cards
+            renderApps();
 
-            // --- 1. Elements ---
+            // --- Generic Social Sharing Logic ---
+            const genericPageUrl = 'https://appsthatmatter.onrender.com/';
+            const pageTitle = encodeURIComponent(document.title);
+            const genericPageDescription = encodeURIComponent('Check out this collection of useful web apps!');
+            const utmParams = 'utm_source=share&utm_medium=social&utm_campaign=user_share';
+            const shareLinks = document.querySelectorAll('.social-link');
+            shareLinks.forEach(link => {
+                const network = link.dataset.network;
+                let url;
+                const shareUrlWithUtm = `${genericPageUrl}?${utmParams}`;
+                const encodedUrl = encodeURIComponent(shareUrlWithUtm);
+                switch(network) {
+                    case 'whatsapp': url = `https://api.whatsapp.com/send?text=${genericPageDescription}%20${encodedUrl}`; break;
+                    case 'facebook': url = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`; break;
+                    case 'twitter': url = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${genericPageDescription}`; break;
+                    case 'linkedin': url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${pageTitle}&summary=${genericPageDescription}`; break;
+                }
+                if (url) {
+                    link.href = url;
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+            const copyButtons = [ document.getElementById('copyBtnFloating'), document.getElementById('copyBtnBottom') ];
+            copyButtons.forEach(button => {
+                if(button) {
+                    button.addEventListener('click', () => {
+                        const urlToCopy = `${genericPageUrl}?${utmParams}`;
+                        navigator.clipboard.writeText(urlToCopy).then(() => {
+                            const originalText = button.textContent;
+                            button.textContent = 'Copied!';
+                            setTimeout(() => { button.textContent = originalText; }, 2000);
+                        });
+                    });
+                }
+            });
+
+            // --- Viral Loop & Referral Logic ---
+            const REFERRAL_GOAL = 3;
             const referralLinkInput = document.getElementById('referralLink');
             const copyReferralBtn = document.getElementById('copyReferralBtn');
             const progressText = document.getElementById('progress-text');
@@ -141,7 +199,6 @@
             const rewardUnlockedText = document.getElementById('reward-unlocked');
             const simulateBtn = document.getElementById('simulate-referral');
 
-            // --- 2. State Management (using localStorage for simulation) ---
             let referralCount = parseInt(localStorage.getItem('referralCount') || '0', 10);
             let userId = localStorage.getItem('userId');
             if (!userId) {
@@ -149,7 +206,6 @@
                 localStorage.setItem('userId', userId);
             }
 
-            // --- 3. Functions ---
             function updateProgressUI() {
                 const percentage = Math.min((referralCount / REFERRAL_GOAL) * 100, 100);
                 progressText.textContent = `Your Progress: ${referralCount}/${REFERRAL_GOAL} Friends Invited`;
@@ -157,26 +213,20 @@
 
                 if (referralCount >= REFERRAL_GOAL) {
                     rewardUnlockedText.classList.remove('hidden');
-                    document.body.classList.add('dark-mode'); // Unlock reward
-                    simulateBtn.style.display = 'none'; // Hide simulation button after goal is met
+                    document.body.classList.add('dark-mode');
+                    simulateBtn.style.display = 'none';
                 }
             }
 
-            function generateAndSetReferralLink() {
-                const uniqueLink = `${pageUrl}?ref=${userId}`;
-                referralLinkInput.value = uniqueLink;
-                return uniqueLink;
-            }
-
-            function setupReferralShareLinks(referralLink) {
-                const encodedLink = encodeURIComponent(referralLink);
-                const shareText = encodeURIComponent(`Check out Apps That Matter! Use my link to join:`);
-                document.getElementById('ref-whatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodedLink}`;
-                document.getElementById('ref-twitter').href = `https://twitter.com/intent/tweet?url=${encodedLink}&text=${shareText}`;
-                document.getElementById('ref-email').href = `mailto:?subject=Check%20out%20Apps%20That%20Matter&body=${shareText}%20${referralLink}`;
-            }
-
-            // --- 4. Event Listeners ---
+            const uniqueLink = `${genericPageUrl}?ref=${userId}`;
+            referralLinkInput.value = uniqueLink;
+            
+            const encodedLink = encodeURIComponent(uniqueLink);
+            const shareText = encodeURIComponent(`Check out Apps That Matter! Use my link to join:`);
+            document.getElementById('ref-whatsapp').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodedLink}`;
+            document.getElementById('ref-twitter').href = `https://twitter.com/intent/tweet?url=${encodedLink}&text=${shareText}`;
+            document.getElementById('ref-email').href = `mailto:?subject=Check%20out%20Apps%20That%20Matter&body=${shareText}%20${uniqueLink}`;
+            
             copyReferralBtn.addEventListener('click', () => {
                 referralLinkInput.select();
                 navigator.clipboard.writeText(referralLinkInput.value);
@@ -185,7 +235,6 @@
                 setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
             });
 
-            // This button is for demonstration purposes to show the progress tracker working
             simulateBtn.addEventListener('click', () => {
                 if (referralCount < REFERRAL_GOAL) {
                     referralCount++;
@@ -193,10 +242,7 @@
                     updateProgressUI();
                 }
             });
-
-            // --- 5. Initialization ---
-            const referralLink = generateAndSetReferralLink();
-            setupReferralShareLinks(referralLink);
+            
             updateProgressUI();
         });
     </script>
