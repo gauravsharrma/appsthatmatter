@@ -1,165 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Original Meta Tags & SEO -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Apps That Matter: Discover our suite of responsive, SEO-optimized, mobile-first design with neumorphic UI." />
-    <meta name="keywords" content="web apps, AI tools, prompt generator, markdown renderer, neumorphic UI, responsive, social sharing, viral loop, referral" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="Apps That Matter - Home" />
-    <meta property="og:description" content="Explore our curated suite of productivity, writing, finance, health, and quick notes." />
-    <meta property="og:url" content="https://appsthatmatter.onrender.com/" />
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apps That Matter: Discover and launch powerful web apps like Prompt Settings Generator, Markdown Reader, EMI Calculator, BMI Calculator, Post-It Notes, and more. Responsive, SEO-optimized, mobile-first design with neumorphic UI." />
+  <meta name="keywords" content="web apps, AI tools, prompt generator, markdown reader, EMI calculator, BMI calculator, post-it notes, neumorphic UI, responsive" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Apps That Matter - Home" />
+  <meta property="og:description" content="Explore our curated collection of useful web apps for productivity, writing, finance, health, and quick notes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/index.html" />
+  <link rel="canonical" href="https://yourdomain.com/index.html" />
+  <title>Apps That Matter | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Merriweather', serif; background: #e0e5ec; }
+    .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; }
+    .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+  </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3REF964SMG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    <title>Apps That Matter | Home</title>
-
-    <!-- Original Fonts & Tailwind -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Original Styles -->
-    <style>
-        body { font-family: 'Merriweather', serif; background: #e0e5ec; transition: background-color 0.3s, color 0.3s; }
-        .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; transition: background-color 0.3s, box-shadow 0.3s; }
-        .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; transition: box-shadow 0.3s; }
-        /* ...other original CSS... */
-    </style>
-
-    <!-- Feature #1: Share Button Tooltips & Dark Mode Support -->
-    <style>
-        /* Share-button tooltip */
-        .share-btn:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 125%; left: 50%; transform: translateX(-50%);
-            background-color: #333; color: #fff; padding: 4px 8px;
-            border-radius: 4px; font-size: 12px; white-space: nowrap; z-index: 10;
-        }
-        /* Dark mode support */
-        body.dark-mode { background-color: #2c2c2c; color: #e0e5ec; }
-        body.dark-mode .neumorphic { background: #2c2c2c; box-shadow: 8px 8px 16px #222222, -8px -8px 16px #363636; }
-        body.dark-mode .neumorphic-inset { box-shadow: inset 8px 8px 16px #222222, inset -8px -8px 16px #363636; }
-    </style>
-    <!-- End Feature #1 -->
-
-    <!-- Feature #13: Google Analytics (GA4) -->
-    <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-3REF964SMG"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-3REF964SMG', { 'anonymize_ip': true });
-    </script>
-    <!-- End Feature #13 -->
-
-    <!-- Feature #11: JSON-LD WebPage Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Apps That Matter - Home",
-      "url": "https://appsthatmatter.onrender.com/",
-      "description": "Explore our curated suite of productivity, writing, and finance web apps.",
-      "inLanguage": "en-US",
-      "datePublished": "2025-06-23"
-    }
-    </script>
-    <!-- End Feature #11 -->
-</head>
-<body class="min-h-screen px-4 md:px-10 py-8">
-
-    <!-- Original Social Sharing Sidebar -->
-    <div class="hidden lg:flex fixed top-1/2 -translate-y-1/2 right-4 flex-col space-y-2 z-30">
-        <a href="#" class="share-btn social-link neumorphic p-3" data-tooltip="Share on Facebook">...Facebook SVG...</a>
-        <a href="#" class="share-btn social-link neumorphic p-3" data-tooltip="Share on Twitter">...Twitter SVG...</a>
-        <button id="copyBtnFloating" class="share-btn neumorphic p-3" data-tooltip="Copy Link">...Copy SVG...</button>
+  gtag('config', 'G-3REF964SMG');
+</script>
+</head><body class="min-h-screen px-4 md:px-10 py-8">
+  <!-- Site Header -->
+  <header class="fixed top-0 w-full z-20 neumorphic py-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <a href="index.html" class="text-2xl font-bold hover:underline">Apps That Matter</a>
     </div>
-
-    <!-- Original Header with Filter & Search -->
-    <header class="fixed top-0 w-full z-20 neumorphic py-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <a href="index.html" class="text-2xl font-bold hover:underline">Apps That Matter</a>
+    <!-- Centered Filter & Search -->
+    <div class="mt-4">
+      <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-4 justify-center">
+        <div class="flex items-center space-x-2">
+          <label for="categoryFilter" class="font-semibold">Filter by Category:</label>
+          <select id="categoryFilter" class="neumorphic-inset px-3 py-2 rounded-lg">
+            <option value="all">All</option>
+            <option value="AI Tools">AI Tools</option>
+            <option value="Utilities">Utilities</option>
+            <option value="Writing">Writing</option>
+            <option value="Finance">Finance</option>
+          </select>
         </div>
-        <div class="mt-4">
-            <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-4 justify-center">
-                <div class="flex items-center space-x-2">
-                    <label for="category" class="sr-only">Category</label>
-                    <select id="category" class="neumorphic-inset px-4 py-2 rounded-lg">
-                        <option value="All">All</option>
-                        <option value="Finance">Finance</option>
-                        <!-- ...other options... -->
-                    </select>
-                </div>
-                <input id="search" type="text" placeholder="Search apps..." class="neumorphic-inset px-4 py-2 rounded-lg w-full sm:w-64" />
-            </div>
-        </div>
-    </header>
+        <input id="search" type="text" placeholder="Search apps..." class="neumorphic-inset px-4 py-2 rounded-lg w-full sm:w-64" />
+      </div>
+    </div>
+  </header>  <!-- Main Content -->  <main class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <a href="apps/prompt-settings.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+      <h2 class="text-lg font-bold mb-1">Prompt Settings Generator</h2>
+      <p class="text-sm text-gray-700 mb-2">Generate LLM prompt settings via Excel upload.</p>
+      <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">AI Tools</span>
+    </a><a href="apps/markdown-reader.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+  <h2 class="text-lg font-bold mb-1">Markdown Reader</h2>
+  <p class="text-sm text-gray-700 mb-2">Convert Markdown to responsive HTML with live preview.</p>
+  <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">Utilities</span>
+</a>
 
-    <!-- Original App Grid -->
-    <main id="apps-grid" class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <!-- ...apps rendered here... -->
-    </main>
+<a href="apps/emi-calculator.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+  <h2 class="text-lg font-bold mb-1">EMI Calculator</h2>
+  <p class="text-sm text-gray-700 mb-2">Compute monthly EMIs, total payment, and interest for any loan.</p>
+  <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">Finance</span>
+</a>
 
-    <!-- Feature #2: Viral Growth Loop Section -->
-    <section id="viral-loop-section" class="neumorphic p-6 mt-12 max-w-2xl mx-auto rounded-xl text-center">
-        <!-- ...original viral loop HTML & JS... -->
-    </section>
-    <!-- End Feature #2 -->
+<a href="apps/bmi-calculator.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+  <h2 class="text-lg font-bold mb-1">BMI Calculator</h2>
+  <p class="text-sm text-gray-700 mb-2">Determine your Body Mass Index and health category instantly.</p>
+  <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">Utilities</span>
+</a>
 
-    <!-- Original Footer Internal Links -->
-    <footer class="mt-12 text-center">
-        <nav>
-            <a href="#" class="mx-2 underline visited:text-purple-600">Home</a>
-            <a href="#" class="mx-2 underline visited:text-purple-600">Features</a>
-            <a href="/about.html" class="mx-2 underline visited:text-purple-600">About</a>
-            <a href="/contact.html" class="mx-2 underline visited:text-purple-600">Contact</a>
-        </nav>
-    </footer>
+<a href="apps/post-it-notes.html" target="_blank" class="neumorphic p-4 rounded-xl hover:scale-105 transition">
+  <h2 class="text-lg font-bold mb-1">Post-It Notes</h2>
+  <p class="text-sm text-gray-700 mb-2">Temporary browser notes: add, delete, and export as JSON, Markdown, or text.</p>
+  <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">Utilities</span>
+</a>
 
-    <!-- Feature #2: Referral & Viral Loop Script (in-memory counter only) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const REFERRAL_GOAL = 5;
-            let referralCount = 0; // in-memory only, resets on reload
-            const progressBar = document.getElementById('progressBar');
-            const copyReferralBtn = document.getElementById('copyReferralBtn');
-            const simulateBtn = document.getElementById('simulateBtn');
+  </main>  <script>
+    const apps = [
+      { name: "Prompt Settings Generator", category: "AI Tools", description: "Generate LLM prompt settings via Excel upload.", link: "apps/prompt-settings.html" },
+      { name: "Markdown Reader", category: "Utilities", description: "Convert Markdown to responsive HTML with live preview.", link: "apps/markdown-reader.html" },
+      { name: "EMI Calculator", category: "Finance", description: "Compute monthly EMIs, total payment, and interest for any loan.", link: "apps/emi-calculator.html" },
+      { name: "BMI Calculator", category: "Utilities", description: "Determine your Body Mass Index and health category instantly.", link: "apps/bmi-calculator.html" },
+      { name: "Post-It Notes", category: "Utilities", description: "Temporary browser notes: add, delete, and export as JSON, Markdown, or text.", link: "apps/post-it-notes.html" }
+    ];
 
-            function updateProgressUI() {
-                const pct = (referralCount / REFERRAL_GOAL) * 100;
-                if (progressBar) progressBar.style.width = pct + '%';
-                const textEl = document.getElementById('progressText');
-                if (textEl) textEl.innerText = referralCount + '/' + REFERRAL_GOAL;
-                const rewardEl = document.getElementById('rewardSection');
-                if (referralCount >= REFERRAL_GOAL && rewardEl) rewardEl.classList.remove('hidden');
-            }
+    const grid = document.querySelector('main');
+    const filter = document.getElementById('categoryFilter');
+    const search = document.getElementById('search');
 
-            if (copyReferralBtn) {
-                copyReferralBtn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(window.location.href + '?ref=' + Date.now());
-                    const originalText = copyReferralBtn.innerHTML;
-                    copyReferralBtn.innerHTML = '✅ Copied!';
-                    setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
-                });
-            }
-
-            if (simulateBtn) {
-                simulateBtn.addEventListener('click', () => {
-                    if (referralCount < REFERRAL_GOAL) {
-                        referralCount++;
-                        updateProgressUI();
-                    }
-                });
-            }
-
-            updateProgressUI();
+    function render() {
+      const term = search.value.toLowerCase();
+      const cat = filter.value;
+      grid.innerHTML = '';
+      apps.filter(a => (cat === 'all' || a.category === cat)
+        && (a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term)))
+        .forEach(a => {
+          const el = document.createElement('a'); el.href = a.link; el.target = '_blank';
+          el.className = 'neumorphic p-4 rounded-xl hover:scale-105 transition';
+          el.innerHTML = `<h2 class="text-lg font-bold mb-1">${a.name}</h2>
+                            <p class="text-sm text-gray-700 mb-2">${a.description}</p>
+                            <span class="text-xs bg-gray-200 px-2 py-1 rounded-full">${a.category}</span>`;
+          grid.appendChild(el);
         });
-    </script>
-    <!-- End Feature #2 -->
+    }
 
-    <!-- Feature #22: Exit-Intent Popup -->
-    <div id="exit-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white p-6 rounded-xl neumorphic max-w-sm mx-auto text-center relative">
-            <h3 class="text-xl font-bold mb-2">Wait! Get 10% Off 🎁</h3>
-            <p class="mb-4">Subscribe to unlock exclusive tips.</p>
-            <input type="email" placeholder="Your
+    filter.addEventListener('change', render);
+    search.addEventListener('input', render);
+    render();
+  </script></body></html>
