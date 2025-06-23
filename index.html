@@ -95,13 +95,16 @@
         </div>
     </header>
 
-    <!-- Original App Grid & Viral Loop Section -->
+    <!-- Original App Grid -->
     <main id="apps-grid" class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <!-- ...apps rendered here... -->
     </main>
+
+    <!-- Feature #2: Viral Growth Loop Section -->
     <section id="viral-loop-section" class="neumorphic p-6 mt-12 max-w-2xl mx-auto rounded-xl text-center">
         <!-- ...original viral loop HTML & JS... -->
     </section>
+    <!-- End Feature #2 -->
 
     <!-- Original Footer Internal Links -->
     <footer class="mt-12 text-center">
@@ -113,113 +116,50 @@
         </nav>
     </footer>
 
-    <!-- Original Referral & Viral Loop Script -->
+    <!-- Feature #2: Referral & Viral Loop Script (in-memory counter only) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const REFERRAL_GOAL = 5;
-            let referralCount = parseInt(localStorage.getItem('referralCount') || '0');
+            let referralCount = 0; // in-memory only, resets on reload
             const progressBar = document.getElementById('progressBar');
             const copyReferralBtn = document.getElementById('copyReferralBtn');
             const simulateBtn = document.getElementById('simulateBtn');
 
             function updateProgressUI() {
                 const pct = (referralCount / REFERRAL_GOAL) * 100;
-                progressBar.style.width = pct + '%';
-                document.getElementById('progressText').innerText = referralCount + '/' + REFERRAL_GOAL;
-                if (referralCount >= REFERRAL_GOAL) document.getElementById('rewardSection').classList.remove('hidden');
+                if (progressBar) progressBar.style.width = pct + '%';
+                const textEl = document.getElementById('progressText');
+                if (textEl) textEl.innerText = referralCount + '/' + REFERRAL_GOAL;
+                const rewardEl = document.getElementById('rewardSection');
+                if (referralCount >= REFERRAL_GOAL && rewardEl) rewardEl.classList.remove('hidden');
             }
 
-            copyReferralBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(window.location.href + '?ref=' + Date.now());
-                const originalText = copyReferralBtn.innerHTML;
-                copyReferralBtn.innerHTML = '✅ Copied!';
-                setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
-            });
+            if (copyReferralBtn) {
+                copyReferralBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(window.location.href + '?ref=' + Date.now());
+                    const originalText = copyReferralBtn.innerHTML;
+                    copyReferralBtn.innerHTML = '✅ Copied!';
+                    setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
+                });
+            }
 
-            simulateBtn.addEventListener('click', () => {
-                if (referralCount < REFERRAL_GOAL) {
-                    referralCount++;
-                    localStorage.setItem('referralCount', referralCount);
-                    updateProgressUI();
-                }
-            });
+            if (simulateBtn) {
+                simulateBtn.addEventListener('click', () => {
+                    if (referralCount < REFERRAL_GOAL) {
+                        referralCount++;
+                        updateProgressUI();
+                    }
+                });
+            }
 
             updateProgressUI();
         });
     </script>
+    <!-- End Feature #2 -->
 
     <!-- Feature #22: Exit-Intent Popup -->
     <div id="exit-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-white p-6 rounded-xl neumorphic max-w-sm mx-auto text-center relative">
             <h3 class="text-xl font-bold mb-2">Wait! Get 10% Off 🎁</h3>
             <p class="mb-4">Subscribe to unlock exclusive tips.</p>
-            <input type="email" placeholder="Your email" class="w-full p-2 border rounded mb-4" />
-            <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Subscribe</button>
-            <button id="exit-close" class="absolute top-2 right-2 text-gray-500">✕</button>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('mouseleave', e => {
-            if (e.clientY < 10) document.getElementById('exit-popup').classList.remove('hidden');
-        });
-        document.getElementById('exit-close').onclick = () => document.getElementById('exit-popup').classList.add('hidden');
-    </script>
-    <!-- End Feature #22 -->
-
-    <!-- Feature #25: Live Search -->
-    <div class="max-w-2xl mx-auto mb-8">
-        <input id="live-search" type="text" placeholder="Search apps instantly..." class="w-full p-3 neumorphic-inset rounded-lg focus:outline-none" />
-        <div id="search-results" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </div>
-    <script>
-        const apps = window.apps || [];
-        const liveInput = document.getElementById('live-search');
-        const resultsDiv = document.getElementById('search-results');
-        liveInput.addEventListener('input', () => {
-            const term = liveInput.value.toLowerCase();
-            resultsDiv.innerHTML = apps.filter(a => a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term))
-                .map(a => `<a href='${a.link}' class='neumorphic p-4 rounded-xl block hover:scale-105 transition'><h4>${a.name}</h4><p>${a.description}</p></a>`) || '<p>No results found.</p>';
-        });
-    </script>
-    <!-- End Feature #25 -->
-
-    <!-- Feature #6: Microinteractions (Button Feedback) -->
-    <script>
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.classList.add('scale-110');
-                setTimeout(() => btn.classList.remove('scale-110'), 150);
-            });
-        });
-    </script>
-    <!-- End Feature #6 -->
-
-    <!-- Feature #4: Emotional CTA Buttons -->
-    <section class="text-center mt-12">
-        <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2 emotional-cta" aria-label="Grab My Free Plan">🔥 Grab My Free Plan</button>
-        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2 emotional-cta" aria-label="Start Now It's Free">🚀 Start Now — It’s Free!</button>
-    </section>
-    <!-- End Feature #4 -->
-
-    <!-- Feature #5: Floating Persistent CTA -->
-    <button class="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-600 neumorphic p-4 rounded-full shadow-lg transition hover:scale-105 focus:outline-none emotional-cta" aria-label="Ask Us">
-        💬 Ask Us
-    </button>
-    <!-- End Feature #5 -->
-
-    <!-- Feature #14: Event Tracking Examples -->
-    <script>
-        document.querySelectorAll('.share-btn, .emotional-cta').forEach(el => {
-            el.addEventListener('click', () => {
-                gtag('event', 'click', { 'event_category': 'engagement', 'event_label': el.getAttribute('aria-label') });
-            });
-        });
-    </script>
-    <!-- End Feature #14 -->
-
-    <!-- Feature #8: Touch-Action for Mobile -->
-    <style>button, a { touch-action: manipulation; }</style>
-    <!-- End Feature #8 -->
-
-</body>
-</html>
+            <input type="email" placeholder="Your
