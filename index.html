@@ -1,148 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Feature #9: SEO Meta Tags & Titles -->
+    <!-- Original Meta Tags & SEO -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🚀 Apps That Matter | Master Your Day in Minutes</title> <!-- Benefit-driven headline in title -->
-    <meta name="description" content="Master your productivity with our curated web apps—financial calculators, note tools, and viral loops to skyrocket engagement." />
-    <meta property="og:title" content="🚀 Apps That Matter | Master Your Day in Minutes" />
-    <meta property="og:description" content="Discover our suite of responsive, SEO-optimized web apps for productivity, health, and finance." />
-    <meta property="og:image" content="/assets/og-image.png" />
+    <meta name="description" content="Apps That Matter: Discover our suite of responsive, SEO-optimized, mobile-first design with neumorphic UI." />
+    <meta name="keywords" content="web apps, AI tools, prompt generator, markdown renderer, neumorphic UI, responsive, social sharing, viral loop, referral" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Apps That Matter - Home" />
+    <meta property="og:description" content="Explore our curated suite of productivity, writing, finance, health, and quick notes." />
     <meta property="og:url" content="https://appsthatmatter.onrender.com/" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="🚀 Apps That Matter | Master Your Day in Minutes" />
-    <meta name="twitter:description" content="Discover our suite of responsive, SEO-optimized web apps for productivity, health, and finance." />
-    <meta name="twitter:image" content="/assets/twitter-card.png" />
-    <link rel="icon" href="/favicon.ico" />
-    <!-- End Feature #9 -->
 
+    <title>Apps That Matter | Home</title>
+
+    <!-- Original Fonts & Tailwind -->
     <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com" defer></script> <!-- Feature #17: Defer Tailwind load for performance -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Original Styles -->
     <style>
         body { font-family: 'Merriweather', serif; background: #e0e5ec; transition: background-color 0.3s, color 0.3s; }
         .neumorphic { background: #e0e5ec; border-radius: 20px; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; transition: background-color 0.3s, box-shadow 0.3s; }
         .neumorphic-inset { box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; transition: box-shadow 0.3s; }
-        .share-btn:hover::after { /* Feature #1: Tooltips for share buttons */
+        /* ...other original CSS... */
+    </style>
+
+    <!-- Feature #1: Share Button Tooltips & Dark Mode Support -->
+    <style>
+        /* Share-button tooltip */
+        .share-btn:hover::after {
             content: attr(data-tooltip);
             position: absolute;
             bottom: 125%; left: 50%; transform: translateX(-50%);
-            background-color: #333; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; z-index: 10;
+            background-color: #333; color: #fff; padding: 4px 8px;
+            border-radius: 4px; font-size: 12px; white-space: nowrap; z-index: 10;
         }
-        /* Reward: Dark Mode */
+        /* Dark mode support */
         body.dark-mode { background-color: #2c2c2c; color: #e0e5ec; }
         body.dark-mode .neumorphic { background: #2c2c2c; box-shadow: 8px 8px 16px #222222, -8px -8px 16px #363636; }
         body.dark-mode .neumorphic-inset { box-shadow: inset 8px 8px 16px #222222, inset -8px -8px 16px #363636; }
-        /* End Feature #1 & #17 */
     </style>
+    <!-- End Feature #1 -->
 
-    <!-- Feature #13: Google Analytics GA4 (anonymize IP) -->
+    <!-- Feature #13: Google Analytics (GA4) -->
     <script async defer src="https://www.googletagmanager.com/gtag/js?id=G-3REF964SMG"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}  // GA init
+        function gtag(){ dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-3REF964SMG', { 'anonymize_ip': true });
     </script>
     <!-- End Feature #13 -->
 
-    <!-- Feature #11 & #15: JSON-LD WebPage Schema + LLM Prompt Block Schema -->
+    <!-- Feature #11: JSON-LD WebPage Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Apps That Matter - Home",
       "url": "https://appsthatmatter.onrender.com/",
-      "description": "Master your productivity with our curated web apps—financial calculators, note tools, and viral loops to skyrocket engagement.",
+      "description": "Explore our curated suite of productivity, writing, and finance web apps.",
       "inLanguage": "en-US",
       "datePublished": "2025-06-23"
     }
     </script>
-    <!-- End Feature #11 & #15 -->
+    <!-- End Feature #11 -->
 </head>
 <body class="min-h-screen px-4 md:px-10 py-8">
 
-    <!-- Feature #3: Headline & Hooks -->
-    <section id="hero" class="text-center mb-12">
-        <h1 class="text-3xl md:text-5xl font-bold">Master Your Day in Minutes 🚀</h1>
-        <h2 class="text-lg md:text-2xl text-gray-600 mt-4">Loved by 10,000+ creators for instant productivity boosts</h2>
-    </section>
-    <!-- End Feature #3 -->
-
-    <!-- Feature #12: Descriptive App Summary for LLMs -->
-    <section id="app-summary" class="neumorphic p-6 mb-12" data-llm-summary>
-        <!-- App Summary for LLMs -->
-        <p class="mb-4">Our suite of web apps helps you streamline tasks—from financial calculators to quick notes—so you can focus on what matters.</p>
-        <ul class="list-disc list-inside">
-            <li>📊 EMI & BMI Calculators</li>
-            <li>📝 Markdown & Post-It Notes</li>
-            <li>🚀 Viral Referral & Share Widgets</li>
-        </ul>
-    </section>
-    <!-- End Feature #12 -->
-
-    <!-- Existing: Social Sharing & Floating Sidebar (Feature #1) -->
+    <!-- Original Social Sharing Sidebar -->
     <div class="hidden lg:flex fixed top-1/2 -translate-y-1/2 right-4 flex-col space-y-2 z-30">
-        <!-- ... existing share buttons ... -->
+        <a href="#" class="share-btn social-link neumorphic p-3" data-tooltip="Share on Facebook">...Facebook SVG...</a>
+        <a href="#" class="share-btn social-link neumorphic p-3" data-tooltip="Share on Twitter">...Twitter SVG...</a>
+        <button id="copyBtnFloating" class="share-btn neumorphic p-3" data-tooltip="Copy Link">...Copy SVG...</button>
     </div>
-    <!-- End Feature #1 -->
 
-    <!-- Feature #25: Live Search -->
-    <div class="max-w-2xl mx-auto mb-8">
-        <!-- Live Search -->
-        <input id="live-search" type="text" placeholder="Search apps instantly..." class="w-full p-3 neumorphic-inset rounded-lg focus:outline-none" />
-        <div id="search-results" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-    </div>
-    <!-- End Feature #25 -->
-
-    <!-- Existing: Header with Filter & Search (kept) -->
+    <!-- Original Header with Filter & Search -->
     <header class="fixed top-0 w-full z-20 neumorphic py-4">
-        <!-- ... existing filter & search ... -->
+        <div class="max-w-7xl mx-auto text-center">
+            <a href="index.html" class="text-2xl font-bold hover:underline">Apps That Matter</a>
+        </div>
+        <div class="mt-4">
+            <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center gap-4 justify-center">
+                <div class="flex items-center space-x-2">
+                    <label for="category" class="sr-only">Category</label>
+                    <select id="category" class="neumorphic-inset px-4 py-2 rounded-lg">
+                        <option value="All">All</option>
+                        <option value="Finance">Finance</option>
+                        <!-- ...other options... -->
+                    </select>
+                </div>
+                <input id="search" type="text" placeholder="Search apps..." class="neumorphic-inset px-4 py-2 rounded-lg w-full sm:w-64" />
+            </div>
+        </div>
     </header>
 
-    <!-- Existing: App Grid Rendering -->
-    <main id="apps-grid" class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></main>
-
-    <!-- Existing: Viral Loop Section (Feature #2) -->
+    <!-- Original App Grid & Viral Loop Section -->
+    <main id="apps-grid" class="pt-36 max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- ...apps rendered here... -->
+    </main>
     <section id="viral-loop-section" class="neumorphic p-6 mt-12 max-w-2xl mx-auto rounded-xl text-center">
-        <!-- ... existing viral loop code ... -->
+        <!-- ...original viral loop HTML & JS... -->
     </section>
-    <!-- End Feature #2 -->
 
-    <!-- Feature #4: Emotional CTA Buttons Examples -->
-    <section class="text-center mt-12">
-        <!-- Emotional CTAs -->
-        <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2" aria-label="Grab My Free Plan">🔥 Grab My Free Plan</button>
-        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2" aria-label="Start Now It's Free">🚀 Start Now — It’s Free!</button>
-    </section>
-    <!-- End Feature #4 -->
+    <!-- Original Footer Internal Links -->
+    <footer class="mt-12 text-center">
+        <nav>
+            <a href="#" class="mx-2 underline visited:text-purple-600">Home</a>
+            <a href="#" class="mx-2 underline visited:text-purple-600">Features</a>
+            <a href="/about.html" class="mx-2 underline visited:text-purple-600">About</a>
+            <a href="/contact.html" class="mx-2 underline visited:text-purple-600">Contact</a>
+        </nav>
+    </footer>
 
-    <!-- Feature #5: Floating Persistent CTA -->
-    <button class="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-600 neumorphic p-4 rounded-full shadow-lg transition hover:scale-105 focus:outline-none" aria-label="Ask Us">
-        💬 Ask Us
-    </button>
-    <!-- End Feature #5 -->
-
-    <!-- Feature #6: Microinteractions (button click feedback) -->
+    <!-- Original Referral & Viral Loop Script -->
     <script>
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.classList.add('scale-110');
-                setTimeout(() => btn.classList.remove('scale-110'), 150);
-            }); // CTA click animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const REFERRAL_GOAL = 5;
+            let referralCount = parseInt(localStorage.getItem('referralCount') || '0');
+            const progressBar = document.getElementById('progressBar');
+            const copyReferralBtn = document.getElementById('copyReferralBtn');
+            const simulateBtn = document.getElementById('simulateBtn');
+
+            function updateProgressUI() {
+                const pct = (referralCount / REFERRAL_GOAL) * 100;
+                progressBar.style.width = pct + '%';
+                document.getElementById('progressText').innerText = referralCount + '/' + REFERRAL_GOAL;
+                if (referralCount >= REFERRAL_GOAL) document.getElementById('rewardSection').classList.remove('hidden');
+            }
+
+            copyReferralBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href + '?ref=' + Date.now());
+                const originalText = copyReferralBtn.innerHTML;
+                copyReferralBtn.innerHTML = '✅ Copied!';
+                setTimeout(() => { copyReferralBtn.innerHTML = originalText; }, 2000);
+            });
+
+            simulateBtn.addEventListener('click', () => {
+                if (referralCount < REFERRAL_GOAL) {
+                    referralCount++;
+                    localStorage.setItem('referralCount', referralCount);
+                    updateProgressUI();
+                }
+            });
+
+            updateProgressUI();
         });
     </script>
-    <!-- End Feature #6 -->
 
-    <!-- Feature #22: Exit-Intent Popup (no localStorage) -->
+    <!-- Feature #22: Exit-Intent Popup -->
     <div id="exit-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <!-- Exit Intent Popup -->
-        <div class="bg-white p-6 rounded-xl neumorphic max-w-sm mx-auto text-center">
+        <div class="bg-white p-6 rounded-xl neumorphic max-w-sm mx-auto text-center relative">
             <h3 class="text-xl font-bold mb-2">Wait! Get 10% Off 🎁</h3>
             <p class="mb-4">Subscribe to unlock exclusive tips.</p>
             <input type="email" placeholder="Your email" class="w-full p-2 border rounded mb-4" />
             <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Subscribe</button>
-            <button id="exit-close" class="absolute top-2 right-2">✕</button>
+            <button id="exit-close" class="absolute top-2 right-2 text-gray-500">✕</button>
         </div>
     </div>
     <script>
@@ -153,16 +166,46 @@
     </script>
     <!-- End Feature #22 -->
 
-    <!-- Feature #10: Internal Linking Footer -->
-    <footer class="mt-12 text-center">
-        <nav>
-            <a href="#hero" class="mx-2 underline visited:text-purple-600" aria-label="Go to top">Home</a>
-            <a href="#app-summary" class="mx-2 underline visited:text-purple-600">Features</a>
-            <a href="/about.html" class="mx-2 underline visited:text-purple-600">About</a>
-            <a href="/contact.html" class="mx-2 underline visited:text-purple-600">Contact</a>
-        </nav>
-    </footer>
-    <!-- End Feature #10 -->
+    <!-- Feature #25: Live Search -->
+    <div class="max-w-2xl mx-auto mb-8">
+        <input id="live-search" type="text" placeholder="Search apps instantly..." class="w-full p-3 neumorphic-inset rounded-lg focus:outline-none" />
+        <div id="search-results" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+    <script>
+        const apps = window.apps || [];
+        const liveInput = document.getElementById('live-search');
+        const resultsDiv = document.getElementById('search-results');
+        liveInput.addEventListener('input', () => {
+            const term = liveInput.value.toLowerCase();
+            resultsDiv.innerHTML = apps.filter(a => a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term))
+                .map(a => `<a href='${a.link}' class='neumorphic p-4 rounded-xl block hover:scale-105 transition'><h4>${a.name}</h4><p>${a.description}</p></a>`) || '<p>No results found.</p>';
+        });
+    </script>
+    <!-- End Feature #25 -->
+
+    <!-- Feature #6: Microinteractions (Button Feedback) -->
+    <script>
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.add('scale-110');
+                setTimeout(() => btn.classList.remove('scale-110'), 150);
+            });
+        });
+    </script>
+    <!-- End Feature #6 -->
+
+    <!-- Feature #4: Emotional CTA Buttons -->
+    <section class="text-center mt-12">
+        <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2 emotional-cta" aria-label="Grab My Free Plan">🔥 Grab My Free Plan</button>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-xl neumorphic shadow-inner transition transform hover:scale-105 mx-2 emotional-cta" aria-label="Start Now It's Free">🚀 Start Now — It’s Free!</button>
+    </section>
+    <!-- End Feature #4 -->
+
+    <!-- Feature #5: Floating Persistent CTA -->
+    <button class="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-600 neumorphic p-4 rounded-full shadow-lg transition hover:scale-105 focus:outline-none emotional-cta" aria-label="Ask Us">
+        💬 Ask Us
+    </button>
+    <!-- End Feature #5 -->
 
     <!-- Feature #14: Event Tracking Examples -->
     <script>
@@ -174,33 +217,9 @@
     </script>
     <!-- End Feature #14 -->
 
-    <!-- Feature #25: Live Search Logic -->
-    <script>
-        const apps = /* existing apps array */[];
-        const liveInput = document.getElementById('live-search');
-        const resultsDiv = document.getElementById('search-results');
-        liveInput.addEventListener('input', () => {
-            const term = liveInput.value.toLowerCase();
-            resultsDiv.innerHTML = apps.filter(a => a.name.toLowerCase().includes(term) || a.description.toLowerCase().includes(term))
-                .map(a => `<a href='${a.link}' class='neumorphic p-4 rounded-xl block hover:scale-105 transition'><h4>${a.name}</h4><p>${a.description}</p></a>`)
-                .join('') || '<p>No results found.</p>';
-        });
-    </script>
-    <!-- End Feature #25 -->
-
-    <!-- Feature #17: Lazy Load Images Example -->
-    <!-- <img src="feature.png" loading="lazy" alt="Feature Preview" /> -->
-    <!-- End Feature #17 -->
-
     <!-- Feature #8: Touch-Action for Mobile -->
     <style>button, a { touch-action: manipulation; }</style>
     <!-- End Feature #8 -->
-
-    <!-- Feature #7: Responsive Nav Hamburger (Example) -->
-    <script>
-        // Mobile nav toggle logic here
-    </script>
-    <!-- End Feature #7 -->
 
 </body>
 </html>
